@@ -29,86 +29,106 @@ class _AuthScreenState extends State<AuthScreen> {
                 "Welcome",
                 style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500),
               ),
-              Row(
-                children: [
-                  Radio(
-                    activeColor: GlobalVariables.secondaryColor,
-                    value: Auth.signup,
-                    groupValue: _auth,
-                    onChanged: (Auth? val) {
-                      setState(() {
-                        _auth = val ?? Auth.signup;
-                      });
-                    },
-                  ),
-                  const Text(
-                    "Sign up",
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                ],
+              Container(
+                color: _auth == Auth.signup
+                    ? GlobalVariables.backgroundColor
+                    : GlobalVariables.greyBackgroundCOlor,
+                child: Row(
+                  children: [
+                    Radio(
+                      activeColor: GlobalVariables.secondaryColor,
+                      value: Auth.signup,
+                      groupValue: _auth,
+                      onChanged: (Auth? val) {
+                        setState(() {
+                          _auth = val ?? Auth.signup;
+                        });
+                      },
+                    ),
+                    const Text(
+                      "Sign up",
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
               ),
               if (_auth == Auth.signup)
-                Form(
-                  key: _signUpFormKey,
-                  child: Column(
-                    children: const [
-                      CustomTextField(
-                        hintText: "Name",
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      CustomTextField(
-                        hintText: "Email",
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      CustomTextField(
-                        hintText: "Password",
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                    ],
+                Container(
+                  padding: EdgeInsets.all(8),
+                  color: _auth == Auth.signup
+                      ? GlobalVariables.backgroundColor
+                      : GlobalVariables.greyBackgroundCOlor,
+                  child: Form(
+                    key: _signUpFormKey,
+                    child: Column(
+                      children: const [
+                        CustomTextField(
+                          hintText: "Name",
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        CustomTextField(
+                          hintText: "Email",
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        CustomTextField(
+                          hintText: "Password",
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              Row(
-                children: [
-                  Radio(
-                    activeColor: GlobalVariables.secondaryColor,
-                    value: Auth.signin,
-                    groupValue: _auth,
-                    onChanged: (Auth? val) {
-                      setState(() {
-                        _auth = val ?? Auth.signin;
-                      });
-                    },
-                  ),
-                  const Text(
-                    "Sign in",
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                ],
+              Container(
+                color: _auth == Auth.signin
+                    ? GlobalVariables.backgroundColor
+                    : GlobalVariables.greyBackgroundCOlor,
+                child: Row(
+                  children: [
+                    Radio(
+                      activeColor: GlobalVariables.secondaryColor,
+                      value: Auth.signin,
+                      groupValue: _auth,
+                      onChanged: (Auth? val) {
+                        setState(() {
+                          _auth = val ?? Auth.signin;
+                        });
+                      },
+                    ),
+                    const Text(
+                      "Sign in",
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
               ),
               if (_auth == Auth.signin)
-                Form(
-                  key: _signUpFormKey,
-                  child: Column(
-                    children: const [
-                      CustomTextField(
-                        hintText: "Email",
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      CustomTextField(
-                        hintText: "Password",
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                    ],
+                Container(
+                  padding: EdgeInsets.all(8),
+                  color: GlobalVariables.backgroundColor,
+                  child: Form(
+                    key: _signUpFormKey,
+                    child: Column(
+                      children: const [
+                        CustomTextField(
+                          hintText: "Email",
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        CustomTextField(
+                          hintText: "Password",
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
             ],

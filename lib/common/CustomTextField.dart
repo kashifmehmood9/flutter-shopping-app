@@ -13,7 +13,7 @@ class CustomTextField extends StatelessWidget {
           hintText: hintText,
           border:
               OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-          enabledBorder: OutlineInputBorder(
+          focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(color: GlobalVariables.secondaryColor))),
       validator: (value) {},
     );
