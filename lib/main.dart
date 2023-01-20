@@ -32,7 +32,8 @@ class MyApp extends StatelessWidget {
                 Builder(builder: (context) {
                   return ElevatedButton(
                       onPressed: () {
-                        Navigator.of(context).pushNamed("/auth-screen");
+                        Navigator.of(context)
+                            .pushNamed(CloneAppRouteName.authScreen.value);
                       },
                       child: const Text("Press me"));
                 })

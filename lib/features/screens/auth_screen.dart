@@ -1,4 +1,7 @@
+import 'package:amazon_clone/Constants/Constants.dart';
 import 'package:flutter/material.dart';
+
+enum Auth { signin, signup }
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({Key? key}) : super(key: key);
@@ -8,12 +11,57 @@ class AuthScreen extends StatefulWidget {
 }
 
 class _AuthScreenState extends State<AuthScreen> {
+  Auth _auth = Auth.signup;
+  final _signUpFormKey = GlobalKey<FormState>();
+  final _signInFormKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: Text('Auth screen'),
-      ),
-    );
+    return Scaffold(
+        backgroundColor: GlobalVariables.greyBackgroundCOlor,
+        body: SafeArea(
+            child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              const Text(
+                "Welcome",
+                style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500),
+              ),
+              ListTile(
+                title: const Text(
+                  "Sign up",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                leading: Radio(
+                  activeColor: GlobalVariables.secondaryColor,
+                  value: Auth.signup,
+                  groupValue: _auth,
+                  onChanged: (Auth? val) {
+                    setState(() {
+                      _auth = val ?? Auth.signup;
+                    });
+                  },
+                ),
+              ),
+              ListTile(
+                title: const Text(
+                  "Sign in",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                leading: Radio(
+                  activeColor: GlobalVariables.secondaryColor,
+                  value: Auth.signin,
+                  groupValue: _auth,
+                  onChanged: (Auth? val) {
+                    setState(() {
+                      _auth = val ?? Auth.signin;
+                    });
+                  },
+                ),
+              )
+            ],
+          ),
+        )));
   }
 }
