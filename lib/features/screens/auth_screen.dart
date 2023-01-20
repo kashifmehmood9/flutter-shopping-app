@@ -29,25 +29,27 @@ class _AuthScreenState extends State<AuthScreen> {
                 "Welcome",
                 style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500),
               ),
-              ListTile(
-                title: const Text(
-                  "Sign up",
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                leading: Radio(
-                  activeColor: GlobalVariables.secondaryColor,
-                  value: Auth.signup,
-                  groupValue: _auth,
-                  onChanged: (Auth? val) {
-                    setState(() {
-                      _auth = val ?? Auth.signup;
-                    });
-                  },
-                ),
+              Row(
+                children: [
+                  Radio(
+                    activeColor: GlobalVariables.secondaryColor,
+                    value: Auth.signup,
+                    groupValue: _auth,
+                    onChanged: (Auth? val) {
+                      setState(() {
+                        _auth = val ?? Auth.signup;
+                      });
+                    },
+                  ),
+                  const Text(
+                    "Sign up",
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ],
               ),
               if (_auth == Auth.signup)
                 Form(
-                  key: _signInFormKey,
+                  key: _signUpFormKey,
                   child: Column(
                     children: const [
                       CustomTextField(
@@ -71,22 +73,44 @@ class _AuthScreenState extends State<AuthScreen> {
                     ],
                   ),
                 ),
-              ListTile(
-                title: const Text(
-                  "Sign in",
-                  style: TextStyle(fontWeight: FontWeight.bold),
+              Row(
+                children: [
+                  Radio(
+                    activeColor: GlobalVariables.secondaryColor,
+                    value: Auth.signin,
+                    groupValue: _auth,
+                    onChanged: (Auth? val) {
+                      setState(() {
+                        _auth = val ?? Auth.signin;
+                      });
+                    },
+                  ),
+                  const Text(
+                    "Sign in",
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+              if (_auth == Auth.signin)
+                Form(
+                  key: _signUpFormKey,
+                  child: Column(
+                    children: const [
+                      CustomTextField(
+                        hintText: "Email",
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      CustomTextField(
+                        hintText: "Password",
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                    ],
+                  ),
                 ),
-                leading: Radio(
-                  activeColor: GlobalVariables.secondaryColor,
-                  value: Auth.signin,
-                  groupValue: _auth,
-                  onChanged: (Auth? val) {
-                    setState(() {
-                      _auth = val ?? Auth.signin;
-                    });
-                  },
-                ),
-              )
             ],
           ),
         )));
