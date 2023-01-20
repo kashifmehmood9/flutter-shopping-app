@@ -1,4 +1,5 @@
 import 'package:amazon_clone/Constants/Constants.dart';
+import 'package:amazon_clone/common/CustomTextField.dart';
 import 'package:flutter/material.dart';
 
 enum Auth { signin, signup }
@@ -44,6 +45,32 @@ class _AuthScreenState extends State<AuthScreen> {
                   },
                 ),
               ),
+              if (_auth == Auth.signup)
+                Form(
+                  key: _signInFormKey,
+                  child: Column(
+                    children: const [
+                      CustomTextField(
+                        hintText: "Name",
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      CustomTextField(
+                        hintText: "Email",
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      CustomTextField(
+                        hintText: "Password",
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                    ],
+                  ),
+                ),
               ListTile(
                 title: const Text(
                   "Sign in",
