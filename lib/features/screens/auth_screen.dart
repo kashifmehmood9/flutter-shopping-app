@@ -1,5 +1,6 @@
 import 'package:amazon_clone/Constants/Constants.dart';
-import 'package:amazon_clone/common/CustomTextField.dart';
+import 'package:amazon_clone/common/custom_button.dart';
+import 'package:amazon_clone/common/custom_text_field.dart';
 import 'package:flutter/material.dart';
 
 enum Auth { signin, signup }
@@ -24,6 +25,7 @@ class _AuthScreenState extends State<AuthScreen> {
             child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text(
                 "Welcome",
@@ -80,6 +82,7 @@ class _AuthScreenState extends State<AuthScreen> {
                         SizedBox(
                           height: 10,
                         ),
+                        CustomButton(text: "Create account", onTap: onTap)
                       ],
                     ),
                   ),
@@ -112,7 +115,7 @@ class _AuthScreenState extends State<AuthScreen> {
                   padding: EdgeInsets.all(8),
                   color: GlobalVariables.backgroundColor,
                   child: Form(
-                    key: _signUpFormKey,
+                    key: _signInFormKey,
                     child: Column(
                       children: const [
                         CustomTextField(
@@ -136,3 +139,5 @@ class _AuthScreenState extends State<AuthScreen> {
         )));
   }
 }
+
+void onTap() {}
