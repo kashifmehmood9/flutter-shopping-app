@@ -56,7 +56,7 @@ class _AuthScreenState extends State<AuthScreen> {
               ),
               if (_auth == Auth.signup)
                 Container(
-                  padding: EdgeInsets.all(8),
+                  padding: const EdgeInsets.all(8),
                   color: _auth == Auth.signup
                       ? GlobalVariables.backgroundColor
                       : GlobalVariables.greyBackgroundCOlor,
@@ -112,7 +112,7 @@ class _AuthScreenState extends State<AuthScreen> {
               ),
               if (_auth == Auth.signin)
                 Container(
-                  padding: EdgeInsets.all(8),
+                  padding: const EdgeInsets.all(8),
                   color: GlobalVariables.backgroundColor,
                   child: Form(
                     key: _signInFormKey,
