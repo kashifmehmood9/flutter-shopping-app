@@ -63,7 +63,7 @@ class _AuthScreenState extends State<AuthScreen> {
                   child: Form(
                     key: _signUpFormKey,
                     child: Column(
-                      children: const [
+                      children: [
                         CustomTextField(
                           hintText: "Name",
                         ),
@@ -82,7 +82,11 @@ class _AuthScreenState extends State<AuthScreen> {
                         SizedBox(
                           height: 10,
                         ),
-                        CustomButton(text: "Create account", onTap: onTap)
+                        CustomButton(
+                          text: "Login",
+                          onTap: () {},
+                          color: GlobalVariables.secondaryColor,
+                        )
                       ],
                     ),
                   ),
