@@ -64,22 +64,22 @@ class _AuthScreenState extends State<AuthScreen> {
                     key: _signUpFormKey,
                     child: Column(
                       children: [
-                        CustomTextField(
+                        const CustomTextField(
                           hintText: "Name",
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
-                        CustomTextField(
+                        const CustomTextField(
                           hintText: "Email",
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
-                        CustomTextField(
+                        const CustomTextField(
                           hintText: "Password",
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         CustomButton(
