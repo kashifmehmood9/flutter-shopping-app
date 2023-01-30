@@ -3,6 +3,8 @@ import 'package:amazon_clone/common/custom_button.dart';
 import 'package:amazon_clone/common/custom_text_field.dart';
 import 'package:flutter/material.dart';
 
+import '../services/auth_service.dart';
+
 enum Auth { signin, signup }
 
 class AuthScreen extends StatefulWidget {

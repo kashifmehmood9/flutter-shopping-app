@@ -26,4 +26,20 @@ class User {
         token: map["token"].toString(),
         type: map["type"].toString());
   }
+
+  String encode(Map<String, dynamic> map) {
+    return encode(map);
+  }
+
+  Map<String, dynamic> toMap() {
+    var map = new Map<String, dynamic>();
+    map["id"] = this.id;
+    map["password"] = this.password;
+    map["name"] = this.name;
+    map["email"] = this.email;
+    map["address"] = this.address;
+    map["token"] = this.token;
+    map["type"] = this.type;
+    return map;
+  }
 }
