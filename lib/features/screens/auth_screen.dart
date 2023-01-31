@@ -5,8 +5,6 @@ import 'package:flutter/material.dart';
 
 import '../services/auth_service.dart';
 
-enum Auth { signin, signup }
-
 class AuthScreen extends StatefulWidget {
   const AuthScreen({Key? key}) : super(key: key);
 
@@ -19,15 +17,20 @@ class _AuthScreenState extends State<AuthScreen> {
   final _signUpFormKey = GlobalKey<FormState>();
   final _signInFormKey = GlobalKey<FormState>();
 
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  final _authService = AuthService();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomInset: false,
         backgroundColor: GlobalVariables.greyBackgroundCOlor,
         body: SafeArea(
             child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text(
                 "Welcome",
@@ -66,27 +69,37 @@ class _AuthScreenState extends State<AuthScreen> {
                     key: _signUpFormKey,
                     child: Column(
                       children: [
-                        const CustomTextField(
+                        CustomTextField(
                           hintText: "Name",
+                          controller: _nameController,
                         ),
                         const SizedBox(
                           height: 10,
                         ),
-                        const CustomTextField(
+                        CustomTextField(
                           hintText: "Email",
+                          controller: _emailController,
                         ),
                         const SizedBox(
                           height: 10,
                         ),
-                        const CustomTextField(
+                        CustomTextField(
                           hintText: "Password",
+                          controller: _passwordController,
                         ),
                         const SizedBox(
                           height: 10,
                         ),
                         CustomButton(
-                          text: "Login",
-                          onTap: () {},
+                          text: "Sign up",
+                          onTap: () {
+                            FocusScope.of(context).unfocus();
+                            _authService.signupUser(
+                                context: context,
+                                username: _nameController.text,
+                                email: _emailController.text,
+                                password: _passwordController.text);
+                          },
                           color: GlobalVariables.secondaryColor,
                         )
                       ],
@@ -123,15 +136,17 @@ class _AuthScreenState extends State<AuthScreen> {
                   child: Form(
                     key: _signInFormKey,
                     child: Column(
-                      children: const [
+                      children: [
                         CustomTextField(
                           hintText: "Email",
+                          controller: _emailController,
                         ),
                         SizedBox(
                           height: 10,
                         ),
                         CustomTextField(
                           hintText: "Password",
+                          controller: _passwordController,
                         ),
                         SizedBox(
                           height: 10,

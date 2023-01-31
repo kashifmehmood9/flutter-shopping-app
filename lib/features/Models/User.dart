@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class User {
   String id;
   String password;
@@ -18,7 +20,7 @@ class User {
 
   factory User.fromMap(Map<String, dynamic> map) {
     return User(
-        id: map["id"].toString(),
+        id: map["_id"].toString(),
         password: map["password"].toString(),
         name: map["name"].toString(),
         email: map["email"].toString(),
@@ -27,19 +29,20 @@ class User {
         type: map["type"].toString());
   }
 
-  String encode(Map<String, dynamic> map) {
-    return encode(map);
+  String encode() {
+    return jsonEncode(this.toMap());
   }
 
   Map<String, dynamic> toMap() {
     var map = new Map<String, dynamic>();
-    map["id"] = this.id;
+    map["_id"] = this.id;
     map["password"] = this.password;
     map["name"] = this.name;
     map["email"] = this.email;
     map["address"] = this.address;
     map["token"] = this.token;
     map["type"] = this.type;
+    print("Map after encoding: " + map.toString());
     return map;
   }
 }

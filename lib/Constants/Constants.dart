@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-String localHostURI = 'http://localhost:3000';
-
 class GlobalVariables {
+  static const headers = {"Content-Type": "application/json; charset=utf-8"};
+  static const localHostURI = 'http://192.168.0.100:3000';
   // COLORS
   static const appBarGradient = LinearGradient(
     colors: [

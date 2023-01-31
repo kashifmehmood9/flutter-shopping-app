@@ -9,11 +9,21 @@ void httpErrorHandler({
   required VoidCallback callback,
   required BuildContext context,
 }) {
+  print("Response status code : ${response.statusCode}");
   switch (response.statusCode) {
     case 200:
       return callback();
 
-    case 400 - 500:
-      showSnackBar(context, jsonDecode(response.body)["msg"]);
+    case 400:
+      showSnackBar(context, jsonDecode(response.body)["message"]);
+      break;
+
+    case 500:
+      showSnackBar(context, jsonDecode(response.body)["error"]);
+      break;
+
+    default:
+      // showSnackBar(context, jsonDecode(response.body));
+      break;
   }
 }

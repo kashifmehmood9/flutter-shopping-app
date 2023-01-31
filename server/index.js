@@ -9,7 +9,7 @@ app.use(authRouter);
 
 
 const PORT = 3000;
-const IP = 'localhost';
+const IP = '192.168.0.100';
 const DBURI = 'mongodb+srv://kashifmehmood:UNsGNPajLCuDSoT9@cluster0.jn9mnr0.mongodb.net'
 
 mongoose.connect(DBURI).then(() => {
