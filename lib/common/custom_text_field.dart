@@ -3,11 +3,15 @@ import 'package:flutter/material.dart';
 
 class CustomTextField extends StatelessWidget {
   const CustomTextField(
-      {Key? key, required this.hintText, required this.controller})
+      {Key? key,
+      required this.hintText,
+      required this.controller,
+      required this.callback})
       : super(key: key);
 
   final TextEditingController controller;
   final String hintText;
+  final ValueChanged<String> callback;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
@@ -18,7 +22,15 @@ class CustomTextField extends StatelessWidget {
               OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
           focusedBorder: const OutlineInputBorder(
               borderSide: BorderSide(color: GlobalVariables.secondaryColor))),
-      validator: (value) {},
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return "Please enter $hintText.";
+        }
+        return null;
+      },
+      onChanged: (value) {
+        callback(value);
+      },
     );
   }
 }

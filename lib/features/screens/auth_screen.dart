@@ -70,23 +70,29 @@ class _AuthScreenState extends State<AuthScreen> {
                     child: Column(
                       children: [
                         CustomTextField(
-                          hintText: "Name",
-                          controller: _nameController,
-                        ),
+                            hintText: "Name",
+                            controller: _nameController,
+                            callback: (value) {
+                              _signUpFormKey.currentState!.validate();
+                            }),
                         const SizedBox(
                           height: 10,
                         ),
                         CustomTextField(
-                          hintText: "Email",
-                          controller: _emailController,
-                        ),
+                            hintText: "Email",
+                            controller: _emailController,
+                            callback: (value) {
+                              _signUpFormKey.currentState!.validate();
+                            }),
                         const SizedBox(
                           height: 10,
                         ),
                         CustomTextField(
-                          hintText: "Password",
-                          controller: _passwordController,
-                        ),
+                            hintText: "Password",
+                            controller: _passwordController,
+                            callback: (value) {
+                              _signUpFormKey.currentState!.validate();
+                            }),
                         const SizedBox(
                           height: 10,
                         ),
@@ -94,11 +100,13 @@ class _AuthScreenState extends State<AuthScreen> {
                           text: "Sign up",
                           onTap: () {
                             FocusScope.of(context).unfocus();
-                            _authService.signupUser(
-                                context: context,
-                                username: _nameController.text,
-                                email: _emailController.text,
-                                password: _passwordController.text);
+                            if (_signUpFormKey.currentState!.validate()) {
+                              _authService.signupUser(
+                                  context: context,
+                                  username: _nameController.text,
+                                  email: _emailController.text,
+                                  password: _passwordController.text);
+                            }
                           },
                           color: GlobalVariables.secondaryColor,
                         )
@@ -138,16 +146,20 @@ class _AuthScreenState extends State<AuthScreen> {
                     child: Column(
                       children: [
                         CustomTextField(
-                          hintText: "Email",
-                          controller: _emailController,
-                        ),
+                            hintText: "Email",
+                            controller: _emailController,
+                            callback: (value) {
+                              _signUpFormKey.currentState!.validate();
+                            }),
                         SizedBox(
                           height: 10,
                         ),
                         CustomTextField(
-                          hintText: "Password",
-                          controller: _passwordController,
-                        ),
+                            hintText: "Password",
+                            controller: _passwordController,
+                            callback: (value) {
+                              _signUpFormKey.currentState!.validate();
+                            }),
                         SizedBox(
                           height: 10,
                         ),
