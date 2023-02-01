@@ -23,9 +23,6 @@ class AuthService {
           address: "",
           token: "",
           type: "");
-      // print("Got user name" + password + email + username);
-      // print(Uri.parse('${localHostURI} /api/signup'));
-
       http.Response response = await http.post(
         Uri.parse('${GlobalVariables.localHostURI}/api/signup'),
         body: user.encode(),
@@ -37,6 +34,40 @@ class AuthService {
           callback: () {
             showSnackBar(context,
                 "User added successfully. Please login using the same credentials.");
+          },
+          context: context);
+    } catch (error) {
+      print("Caught error ${error}");
+
+      showSnackBar(context, error.toString());
+    }
+  }
+
+  void signinUser({
+    required BuildContext context,
+    required String email,
+    required String password,
+  }) async {
+    try {
+      var user = User(
+          id: "",
+          password: password,
+          name: "",
+          email: email,
+          address: "",
+          token: "",
+          type: "");
+
+      http.Response response = await http.post(
+        Uri.parse('${GlobalVariables.localHostURI}/api/signin'),
+        body: user.encode(),
+        headers: GlobalVariables.headers,
+      );
+
+      httpErrorHandler(
+          response: response,
+          callback: () {
+            showSnackBar(context, "User sign in successfully.");
           },
           context: context);
     } catch (error) {

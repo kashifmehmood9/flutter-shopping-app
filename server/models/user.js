@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
-var validateEmail = function(email) {
-    var re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+let validateEmail = function(email) {
+    let re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     return re.test(email)
 };
 const userSchema = mongoose.Schema({
@@ -27,6 +27,12 @@ const userSchema = mongoose.Schema({
   password: {
     type: String,
     required: true,
+    validate: {
+    validator: function (value) {
+      return value.length > 6;
+    },
+    message: "Password should be longer than 6 characters",
+    }
   },
   address: {
     type: String,

@@ -149,7 +149,7 @@ class _AuthScreenState extends State<AuthScreen> {
                             hintText: "Email",
                             controller: _emailController,
                             callback: (value) {
-                              _signUpFormKey.currentState!.validate();
+                              _signInFormKey.currentState!.validate();
                             }),
                         SizedBox(
                           height: 10,
@@ -158,11 +158,22 @@ class _AuthScreenState extends State<AuthScreen> {
                             hintText: "Password",
                             controller: _passwordController,
                             callback: (value) {
-                              _signUpFormKey.currentState!.validate();
+                              _signInFormKey.currentState!.validate();
                             }),
                         SizedBox(
                           height: 10,
                         ),
+                        CustomButton(
+                            text: "Sign in",
+                            onTap: () {
+                              FocusScope.of(context).unfocus();
+                              // if (_signInFormKey.currentState!.validate()) {
+                              _authService.signinUser(
+                                  context: context,
+                                  email: _emailController.text,
+                                  password: _passwordController.text);
+                              // }
+                            })
                       ],
                     ),
                   ),
