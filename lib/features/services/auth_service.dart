@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 import '../../Constants/Constants.dart';
 import '../../Constants/error_handling.dart';
 import '../../Constants/utils.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 enum Auth { signin, signup }
 
@@ -64,13 +65,14 @@ class AuthService {
         body: user.encode(),
         headers: GlobalVariables.headers,
       );
-      var decodedUser = jsonDecode(response.body);
-      print("Decoded User $decodedUser");
+      user = User.fromMap(jsonDecode(response.body));
 
       httpErrorHandler(
           response: response,
-          callback: () {
+          callback: () async {
             showSnackBar(context, "User sign in successfully.");
+            SharedPreferences prefs = await SharedPreferences.getInstance();
+            prefs.setString("x-auth-token", user.token);
           },
           context: context);
     } catch (error) {
