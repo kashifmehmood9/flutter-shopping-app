@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:amazon_clone/features/Models/User.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
@@ -43,11 +45,10 @@ class AuthService {
     }
   }
 
-  void signinUser({
-    required BuildContext context,
-    required String email,
-    required String password,
-  }) async {
+  void signinUser(
+      {required BuildContext context,
+      required String email,
+      required String password}) async {
     try {
       var user = User(
           id: "",
@@ -63,6 +64,8 @@ class AuthService {
         body: user.encode(),
         headers: GlobalVariables.headers,
       );
+      var decodedUser = jsonDecode(response.body);
+      print("Decoded User $decodedUser");
 
       httpErrorHandler(
           response: response,

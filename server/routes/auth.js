@@ -1,7 +1,7 @@
 const express = require("express");
 const User = require("../models/user");
 const bcrypt = require("bcryptjs");
-
+const jwt = require("jsonwebtoken");
 const authRouter = express.Router();
 
 authRouter.post("/api/signup", async (req, res) => {
@@ -47,8 +47,9 @@ authRouter.post("/api/signin", async (req, res) => {
           message: "Incorrect password. Please enter correct password.",
         });
     }
+    const token = jwt.sign({ id: user._id }, "passwordKey");
 
-    return res.status(200).json(user);
+    return res.status(200).json({token,...user._doc});
   } catch (exception) {
     console.log(exception);
     return res.status(500).json({ error: exception.message });
