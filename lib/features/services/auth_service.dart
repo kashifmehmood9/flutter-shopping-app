@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:amazon_clone/features/Models/User.dart';
 import 'package:amazon_clone/features/providers/user_provider.dart';
+import 'package:amazon_clone/router.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import '../../Constants/Constants.dart';
@@ -76,6 +77,8 @@ class AuthService {
             SharedPreferences prefs = await SharedPreferences.getInstance();
             Provider.of<UserProvider>(context, listen: false).set(user);
             prefs.setString("x-auth-token", user.token);
+            Navigator.pushNamedAndRemoveUntil(
+                context, CloneAppRouteName.homeScreen.value, (router) => false);
           },
           context: context);
     } catch (error) {
