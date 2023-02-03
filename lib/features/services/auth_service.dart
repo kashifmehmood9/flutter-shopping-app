@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:amazon_clone/features/Models/User.dart';
 import 'package:amazon_clone/features/providers/user_provider.dart';
 import 'package:amazon_clone/router.dart';
@@ -78,13 +77,32 @@ class AuthService {
             Provider.of<UserProvider>(context, listen: false).set(user);
             prefs.setString("x-auth-token", user.token);
             Navigator.pushNamedAndRemoveUntil(
-                context, CloneAppRouteName.homeScreen.value, (router) => false);
+                context, RouteNames.bottomBar.value, (router) => false);
           },
           context: context);
     } catch (error) {
       print("Caught error ${error}");
 
       showSnackBar(context, error.toString());
+    }
+  }
+
+  void getUserData({required BuildContext context}) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? token = prefs.getString(GlobalVariables.JWTtokenKey) ?? "";
+    Map<String, String> headers = GlobalVariables.headers;
+    headers.addAll({GlobalVariables.JWTtokenKey: token});
+    var tokenResponse = await http.post(
+      Uri.parse("${GlobalVariables.localHostURI}/api/tokenIsValid"),
+      headers: headers,
+    );
+
+    if (jsonDecode(tokenResponse.body)) {
+      http.Response userResponse = await http.get(
+          Uri.parse("${GlobalVariables.localHostURI}/api/"),
+          headers: headers);
+      var user = User.fromMap(jsonDecode(userResponse.body));
+      Provider.of<UserProvider>(context, listen: false).set(user);
     }
   }
 }

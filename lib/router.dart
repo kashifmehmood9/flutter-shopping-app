@@ -1,13 +1,15 @@
 import 'package:amazon_clone/features/screens/auth_screen.dart';
 import 'package:amazon_clone/features/screens/home_screen/home_screen.dart';
+import 'package:amazon_clone/features/widgets/bottom_bar.dart';
 import 'package:flutter/material.dart';
 
-enum CloneAppRouteName {
+enum RouteNames {
   authScreen('/auth-screen'),
   loginScreen(''),
-  homeScreen('home-screen');
+  homeScreen('/home-screen'),
+  bottomBar('/actual-home');
 
-  const CloneAppRouteName(this.value);
+  const RouteNames(this.value);
   final String value;
 }
 
@@ -15,10 +17,10 @@ Route<dynamic> generateRoute(RouteSettings settings) {
   print("++ Generate route called");
   print(settings.name);
 
-  if (settings.name == CloneAppRouteName.authScreen.value) {
+  if (settings.name == RouteNames.authScreen.value) {
     return MaterialPageRoute(builder: (_) => AuthScreen());
-  } else if (settings.name == CloneAppRouteName.homeScreen.value) {
-    return MaterialPageRoute(builder: (_) => HomeScreen());
+  } else if (settings.name == RouteNames.bottomBar.value) {
+    return MaterialPageRoute(builder: (_) => BottomBar());
   } else {
     return MaterialPageRoute(
         builder: (_) => const Scaffold(
