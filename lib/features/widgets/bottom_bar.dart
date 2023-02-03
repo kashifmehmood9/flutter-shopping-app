@@ -1,4 +1,5 @@
 import 'package:amazon_clone/Constants/Constants.dart';
+import 'package:amazon_clone/features/screens/home_screen/home_screen.dart';
 import "package:flutter/material.dart";
 import "package:badges/badges.dart";
 
@@ -14,6 +15,16 @@ class _BottomBarState extends State<BottomBar> {
   double bottomBarWidth = 42;
   double bottomBarBorderWidth = 5;
 
+  List pages = [
+    HomeScreen(),
+    Center(
+      child: Text("Account page"),
+    ),
+    Center(
+      child: Text("Shopping cart page"),
+    )
+  ];
+
   void updatePage(int page) {
     print("Page is $page");
     setState(() {
@@ -24,6 +35,7 @@ class _BottomBarState extends State<BottomBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      body: pages[_page],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _page,
         selectedItemColor: GlobalVariables.selectedNavBarColor,
@@ -46,7 +58,7 @@ class _BottomBarState extends State<BottomBar> {
                   ),
                   child: Icon(Icons.home_outlined))),
           BottomNavigationBarItem(
-              label: "Profile",
+              label: "Account",
               icon: Container(
                   width: bottomBarWidth,
                   decoration: BoxDecoration(
@@ -71,7 +83,9 @@ class _BottomBarState extends State<BottomBar> {
                             width: bottomBarBorderWidth)),
                   ),
                   child: const Badge(
-                    badgeStyle: BadgeStyle(elevation: 0),
+                    badgeStyle: BadgeStyle(
+                        elevation: 0,
+                        badgeColor: GlobalVariables.backgroundColor),
                     badgeContent: Text("2"),
                     showBadge: true,
                     child: Icon(Icons.shopping_cart_outlined),
