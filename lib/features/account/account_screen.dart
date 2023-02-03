@@ -28,11 +28,10 @@ class AccountScreen extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    // Padding(
-                    //   padding: EdgeInsets.only(right: 15),
-                    //   child:
-                    Icon(Icons.notifications_outlined),
-                    // ),
+                    Padding(
+                      padding: EdgeInsets.only(right: 15),
+                      child: Icon(Icons.notifications_outlined),
+                    ),
                     Icon(Icons.search),
                   ],
                 ))
