@@ -1,5 +1,6 @@
 import 'package:amazon_clone/Constants/Constants.dart';
 import "package:flutter/material.dart";
+import "package:badges/badges.dart";
 
 class BottomBar extends StatefulWidget {
   const BottomBar({Key? key}) : super(key: key);
@@ -13,6 +14,13 @@ class _BottomBarState extends State<BottomBar> {
   double bottomBarWidth = 42;
   double bottomBarBorderWidth = 5;
 
+  void updatePage(int page) {
+    print("Page is $page");
+    setState(() {
+      _page = page;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,6 +29,7 @@ class _BottomBarState extends State<BottomBar> {
         selectedItemColor: GlobalVariables.selectedNavBarColor,
         backgroundColor: GlobalVariables.backgroundColor,
         unselectedItemColor: GlobalVariables.unselectedNavBarColor,
+        onTap: updatePage,
         iconSize: 28,
         items: [
           BottomNavigationBarItem(
@@ -61,7 +70,12 @@ class _BottomBarState extends State<BottomBar> {
                                 : GlobalVariables.backgroundColor,
                             width: bottomBarBorderWidth)),
                   ),
-                  child: Icon(Icons.shopping_cart)))
+                  child: const Badge(
+                    badgeStyle: BadgeStyle(elevation: 0),
+                    badgeContent: Text("2"),
+                    showBadge: true,
+                    child: Icon(Icons.shopping_cart_outlined),
+                  )))
         ],
       ),
     );
