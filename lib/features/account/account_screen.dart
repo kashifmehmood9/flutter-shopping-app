@@ -1,4 +1,6 @@
 import 'package:amazon_clone/Constants/Constants.dart';
+import 'package:amazon_clone/features/screens/widgets/app_bar_hello_widget.dart';
+import 'package:amazon_clone/features/screens/widgets/top_buttons.dart';
 import "package:flutter/material.dart";
 
 class AccountScreen extends StatelessWidget {
@@ -27,7 +29,7 @@ class AccountScreen extends StatelessWidget {
                 padding: EdgeInsets.only(left: 15, right: 15),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
+                  children: const [
                     Padding(
                       padding: EdgeInsets.only(right: 15),
                       child: Icon(Icons.notifications_outlined),
@@ -37,6 +39,9 @@ class AccountScreen extends StatelessWidget {
                 ))
           ]),
         ),
+      ),
+      body: Column(
+        children: [AppBarHelloTextWidget(), TopButton()],
       ),
     );
   }
