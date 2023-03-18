@@ -50,7 +50,7 @@ authRouter.post("/api/signin", async (req, res) => {
           message: "Incorrect password. Please enter correct password.",
         });
     }
-    const token = jwt.sign({ id: user._id }, "passwordKey");
+    const token = jwt.sign({ id: user._id }, "passwordKey", { expiresIn: 60});
 
     return res.status(200).json({token,...user._doc});
   } catch (exception) {
@@ -63,7 +63,7 @@ authRouter.post("/api/signin", async (req, res) => {
 authRouter.post("/api/tokenIsValid", async (req, res) => {
   try {
     const token  = req.header("x-auth-token");
-
+    
     if (!token) {return res.json({ message: "No token provided."})};
 
     const verified = jwt.verify(token, "passwordKey");
@@ -76,7 +76,7 @@ authRouter.post("/api/tokenIsValid", async (req, res) => {
     }
     catch (exception) {
       console.log(exception);
-      return res.status(500).json({ error: exception.message });
+      return res.status(500).json(false);
       }});
 
 

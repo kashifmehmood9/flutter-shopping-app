@@ -1,14 +1,16 @@
 import 'dart:convert';
+
 import 'package:amazon_clone/features/Models/User.dart';
 import 'package:amazon_clone/features/providers/user_provider.dart';
 import 'package:amazon_clone/router.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
+import "package:provider/provider.dart";
+import 'package:shared_preferences/shared_preferences.dart';
+
 import '../../Constants/Constants.dart';
 import '../../Constants/error_handling.dart';
 import '../../Constants/utils.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import "package:provider/provider.dart";
 
 enum Auth { signin, signup }
 
@@ -89,9 +91,14 @@ class AuthService {
 
   void getUserData({required BuildContext context}) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? token = prefs.getString(GlobalVariables.JWTtokenKey) ?? "";
+    String? token = prefs.getString(GlobalVariables.JWTtokenKey);
+
+    if (token == null) {
+      prefs.setString(GlobalVariables.JWTtokenKey, "");
+    }
+
     Map<String, String> headers = GlobalVariables.headers;
-    headers.addAll({GlobalVariables.JWTtokenKey: token});
+    headers.addAll({GlobalVariables.JWTtokenKey: token!});
     var tokenResponse = await http.post(
       Uri.parse("${GlobalVariables.localHostURI}/api/tokenIsValid"),
       headers: headers,
@@ -99,7 +106,7 @@ class AuthService {
 
     if (jsonDecode(tokenResponse.body)) {
       http.Response userResponse = await http.get(
-          Uri.parse("${GlobalVariables.localHostURI}/api/"),
+          Uri.parse("${GlobalVariables.localHostURI}/api/users"),
           headers: headers);
       var user = User.fromMap(jsonDecode(userResponse.body));
       Provider.of<UserProvider>(context, listen: false).set(user);
