@@ -34,7 +34,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     var token =
         Provider.of<UserProvider>(context).get()?.token.isNotEmpty ?? false;
-
+    print("Token is $token");
     return MaterialApp(
       title: 'Amazon clone',
       theme: ThemeData(

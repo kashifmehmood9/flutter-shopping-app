@@ -1,5 +1,6 @@
 import 'package:amazon_clone/Constants/Constants.dart';
 import 'package:amazon_clone/features/screens/widgets/app_bar_hello_widget.dart';
+import 'package:amazon_clone/features/screens/widgets/orders.dart';
 import 'package:amazon_clone/features/screens/widgets/top_buttons.dart';
 import "package:flutter/material.dart";
 
@@ -10,10 +11,11 @@ class AccountScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(50),
+        preferredSize: const Size.fromHeight(50),
         child: AppBar(
           flexibleSpace: Container(
-            decoration: BoxDecoration(gradient: GlobalVariables.appBarGradient),
+            decoration:
+                const BoxDecoration(gradient: GlobalVariables.appBarGradient),
           ),
           title:
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
@@ -26,7 +28,7 @@ class AccountScreen extends StatelessWidget {
               ),
             ),
             Container(
-                padding: EdgeInsets.only(left: 15, right: 15),
+                padding: const EdgeInsets.only(left: 15, right: 15),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: const [
@@ -41,7 +43,17 @@ class AccountScreen extends StatelessWidget {
         ),
       ),
       body: Column(
-        children: [AppBarHelloTextWidget(), TopButton()],
+        children: const [
+          AppBarHelloTextWidget(),
+          SizedBox(
+            height: 10,
+          ),
+          TopButton(),
+          SizedBox(
+            height: 20,
+          ),
+          Orders()
+        ],
       ),
     );
   }

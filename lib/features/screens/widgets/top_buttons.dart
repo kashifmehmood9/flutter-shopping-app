@@ -9,7 +9,19 @@ class TopButton extends StatelessWidget {
     return Column(
       children: [
         Row(
-          children: [AccountButton(text: "Your Orders", onTap: () {})],
+          children: [
+            AccountButton(text: "Your Orders", onTap: () {}),
+            AccountButton(text: "Turn seller", onTap: () {})
+          ],
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+        Row(
+          children: [
+            AccountButton(text: "Logout", onTap: () {}),
+            AccountButton(text: "WishList", onTap: () {})
+          ],
         )
       ],
     );

@@ -14,14 +14,17 @@ class AppBarHelloTextWidget extends StatelessWidget {
       decoration: const BoxDecoration(
         gradient: GlobalVariables.appBarGradient,
       ),
-      padding: EdgeInsets.fromLTRB(10, 0, 10, 10),
+      padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
       child: Row(
         children: [
           RichText(
               text: TextSpan(
                   text: "Hello, ${user?.name}!",
-                  style: TextStyle(color: Colors.black, fontSize: 22.0))),
-          SizedBox(
+                  style: const TextStyle(
+                      color: Colors.black,
+                      fontSize: 22.0,
+                      fontWeight: FontWeight.w600))),
+          const SizedBox(
             height: 10,
           )
         ],
