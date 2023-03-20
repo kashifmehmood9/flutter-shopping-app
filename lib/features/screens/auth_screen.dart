@@ -168,6 +168,7 @@ class _AuthScreenState extends State<AuthScreen> {
                             onTap: () {
                               FocusScope.of(context).unfocus();
                               // if (_signInFormKey.currentState!.validate()) {
+                              //TODO: Remove this before commit;
                               _authService.signinUser(
                                   context: context,
                                   email: _emailController.text,
