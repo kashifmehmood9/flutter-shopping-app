@@ -1,7 +1,6 @@
 class CatergoryImages {
-
-CatergoryImages( this.imageSource, this.imageTitle)
-
-  String imageTitle;
   String imageSource;
+  String imageTitle;
+
+  CatergoryImages({required this.imageSource, required this.imageTitle});
 }

@@ -7,7 +7,7 @@ class TopCategories extends StatelessWidget {
 
   List<CatergoryImages> getCategoryImages() {
     return GlobalVariables.categoryImages.map((e) {
-      return CatergoryImages(e["image"]!, e["title"]!);
+      return CatergoryImages(imageSource: e["image"]!, imageTitle: e["title"]!);
     }).toList();
   }
 
@@ -23,7 +23,7 @@ class TopCategories extends StatelessWidget {
           return Column(
             children: [
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 10),
+                padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(50),
                   child: Image.asset(
@@ -34,7 +34,10 @@ class TopCategories extends StatelessWidget {
                   ),
                 ),
               ),
-              Text(getCategoryImages()[index].imageTitle)
+              Text(
+                getCategoryImages()[index].imageTitle,
+                style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
+              ),
             ],
           );
         },
