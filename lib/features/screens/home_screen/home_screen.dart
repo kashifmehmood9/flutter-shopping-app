@@ -1,4 +1,6 @@
 import 'package:amazon_clone/features/screens/widgets/address_box.dart';
+import 'package:amazon_clone/features/screens/widgets/carousel_image.dart';
+import 'package:amazon_clone/features/screens/widgets/deal_of_the_day.dart';
 import 'package:amazon_clone/features/screens/widgets/top_categories.dart';
 import "package:flutter/material.dart";
 
@@ -68,14 +70,24 @@ class HomeScreen extends StatelessWidget {
           ]),
         ),
       ),
-      body: Column(
-        children: [
-          AddressBox(),
-          const SizedBox(
-            height: 10,
-          ),
-          TopCategories()
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            AddressBox(),
+            const SizedBox(
+              height: 10,
+            ),
+            const TopCategories(),
+            const SizedBox(
+              height: 10,
+            ),
+            const CarousellImage(),
+            const SizedBox(
+              height: 10,
+            ),
+            const DealOfTheDay()
+          ],
+        ),
       ),
     );
   }

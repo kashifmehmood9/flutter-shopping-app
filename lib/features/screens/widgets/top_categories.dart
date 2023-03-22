@@ -17,7 +17,7 @@ class TopCategories extends StatelessWidget {
       height: 60,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        itemExtent: 75,
+        itemExtent: 80,
         itemCount: getCategoryImages().length,
         itemBuilder: (context, index) {
           return Column(
@@ -36,7 +36,8 @@ class TopCategories extends StatelessWidget {
               ),
               Text(
                 getCategoryImages()[index].imageTitle,
-                style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
+                style:
+                    const TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
               ),
             ],
           );
