@@ -10,6 +10,7 @@ void httpErrorHandler({
   required BuildContext context,
 }) {
   print("Response status code : ${response.statusCode}");
+  print(response.body);
   switch (response.statusCode) {
     case 200:
       return callback();

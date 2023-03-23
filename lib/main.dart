@@ -1,3 +1,4 @@
+import 'package:amazon_clone/features/admin_screens/admin_screen.dart';
 import 'package:amazon_clone/features/screens/auth_screen.dart';
 import 'package:amazon_clone/features/widgets/bottom_bar.dart';
 import 'package:amazon_clone/router.dart';
@@ -32,20 +33,26 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    var token =
-        Provider.of<UserProvider>(context).get()?.token.isNotEmpty ?? false;
-    print("Token is $token");
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Amazon clone',
       theme: ThemeData(
-          primarySwatch: Colors.blue,
-          scaffoldBackgroundColor: GlobalVariables.backgroundColor,
-          colorScheme:
-              const ColorScheme.light(primary: GlobalVariables.secondaryColor),
-          appBarTheme: const AppBarTheme(
-              elevation: 0, iconTheme: IconThemeData(color: Colors.black))),
-      onGenerateRoute: (settings) => generateRoute(settings),
-      home: token ? BottomBar() : AuthScreen(),
+        primarySwatch: Colors.blue,
+        scaffoldBackgroundColor: GlobalVariables.backgroundColor,
+        colorScheme:
+            const ColorScheme.light(primary: GlobalVariables.secondaryColor),
+        appBarTheme: const AppBarTheme(
+          elevation: 0,
+          iconTheme: IconThemeData(color: Colors.black),
+        ),
+      ),
+      home: AdminScreen(),
+      // onGenerateRoute: (settings) => generateRoute(settings),
+      // home: Provider.of<UserProvider>(context).get().token.isNotEmpty
+      // ? Provider.of<UserProvider>(context).get().type == 'user'
+      // ? const BottomBar()
+      // : const AdminScreen()
+      // : const AuthScreen(),
     );
   }
 }

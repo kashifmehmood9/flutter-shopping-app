@@ -80,7 +80,7 @@ class _DealOfTheDayState extends State<DealOfTheDay> {
             ),
           ),
           Container(
-            padding: EdgeInsets.only(left: 15, top: 15, bottom: 15),
+            padding: const EdgeInsets.only(left: 15, top: 15, bottom: 15),
             alignment: Alignment.topLeft,
             child: Text(
               "All Deals",
