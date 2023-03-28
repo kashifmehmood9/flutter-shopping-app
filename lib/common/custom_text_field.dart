@@ -6,20 +6,22 @@ class CustomTextField extends StatelessWidget {
       {Key? key,
       required this.hintText,
       required this.controller,
-      required this.callback})
+      required this.callback,
+      this.maxLines = 1})
       : super(key: key);
 
   final TextEditingController controller;
   final String hintText;
   final ValueChanged<String> callback;
+  final int maxLines;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
       decoration: InputDecoration(
           hintText: hintText,
-          border:
-              OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+          border: const OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.black)),
           focusedBorder: const OutlineInputBorder(
               borderSide: BorderSide(color: GlobalVariables.secondaryColor))),
       validator: (value) {
@@ -31,6 +33,7 @@ class CustomTextField extends StatelessWidget {
       onChanged: (value) {
         callback(value);
       },
+      maxLines: maxLines,
     );
   }
 }

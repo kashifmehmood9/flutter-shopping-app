@@ -1,9 +1,10 @@
+import 'package:amazon_clone/features/admin_screens/posts_screen.dart';
 import 'package:flutter/material.dart';
 import '../../Constants/Constants.dart';
 
 class AdminScreen extends StatefulWidget {
   const AdminScreen({super.key});
-
+  static const screenName = "/admin_screen";
   @override
   State<AdminScreen> createState() => _AdminScreenState();
 }
@@ -14,9 +15,7 @@ class _AdminScreenState extends State<AdminScreen> {
   double bottomBarBorderWidth = 5;
 
   List pages = [
-    Center(
-      child: Text("Posts page"),
-    ),
+    PostsScreen(),
     Center(
       child: Text("Analytics page"),
     ),

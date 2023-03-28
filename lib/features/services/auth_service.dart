@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:amazon_clone/features/Models/User.dart';
 import 'package:amazon_clone/features/providers/user_provider.dart';
+import 'package:amazon_clone/features/widgets/bottom_bar.dart';
 import 'package:amazon_clone/router.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
@@ -79,7 +80,7 @@ class AuthService {
             Provider.of<UserProvider>(context, listen: false).set(user);
             prefs.setString("x-auth-token", user.token);
             Navigator.pushNamedAndRemoveUntil(
-                context, RouteNames.bottomBar.value, (router) => false);
+                context, BottomBar.screenName, (router) => false);
           },
           context: context);
     } catch (error) {

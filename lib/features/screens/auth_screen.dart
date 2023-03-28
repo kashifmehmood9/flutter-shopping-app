@@ -7,7 +7,7 @@ import '../services/auth_service.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({Key? key}) : super(key: key);
-
+  static const String screenName = "/auth-screen";
   @override
   State<AuthScreen> createState() => _AuthScreenState();
 }

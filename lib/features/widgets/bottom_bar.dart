@@ -6,7 +6,7 @@ import "package:badges/badges.dart";
 
 class BottomBar extends StatefulWidget {
   const BottomBar({Key? key}) : super(key: key);
-
+  static const screenName = "/bottom_bar";
   @override
   State<BottomBar> createState() => _BottomBarState();
 }
