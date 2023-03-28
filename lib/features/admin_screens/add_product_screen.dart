@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:amazon_clone/Constants/utils.dart';
 import 'package:amazon_clone/common/custom_button.dart';
 import 'package:amazon_clone/common/custom_text_field.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import '../../Constants/Constants.dart';
@@ -77,37 +78,57 @@ class _AddProductScreenState extends State<AddProductScreen> {
                 const SizedBox(
                   height: 20,
                 ),
-                GestureDetector(
-                  onTap: selectImages,
-                  child: DottedBorder(
-                    borderType: BorderType.RRect,
-                    radius: const Radius.circular(10),
-                    dashPattern: const [10, 4],
-                    strokeCap: StrokeCap.round,
-                    child: Container(
-                      width: double.infinity,
-                      height: 150,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10)),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
-                          Icon(
-                            Icons.folder_open_outlined,
-                            size: 40,
+                imagesList.isNotEmpty
+                    ? GestureDetector(
+                        onTap: selectImages,
+                        child: CarouselSlider(
+                          items: imagesList.map((file) {
+                            return Builder(
+                              builder: (context) => Image.file(
+                                file,
+                                fit: BoxFit.cover,
+                              ),
+                            );
+                          }).toList(),
+                          options: CarouselOptions(
+                            viewportFraction: 1,
+                            // height: 200,
+                            autoPlay: true,
                           ),
-                          SizedBox(
-                            height: 15,
+                        ),
+                      )
+                    : GestureDetector(
+                        onTap: selectImages,
+                        child: DottedBorder(
+                          borderType: BorderType.RRect,
+                          radius: const Radius.circular(10),
+                          dashPattern: const [10, 4],
+                          strokeCap: StrokeCap.round,
+                          child: Container(
+                            width: double.infinity,
+                            height: 150,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10)),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: const [
+                                Icon(
+                                  Icons.folder_open_outlined,
+                                  size: 40,
+                                ),
+                                SizedBox(
+                                  height: 15,
+                                ),
+                                Text(
+                                  "Select product images",
+                                  style: TextStyle(
+                                      fontSize: 15, color: Colors.grey),
+                                )
+                              ],
+                            ),
                           ),
-                          Text(
-                            "Select product images",
-                            style: TextStyle(fontSize: 15, color: Colors.grey),
-                          )
-                        ],
+                        ),
                       ),
-                    ),
-                  ),
-                ),
                 const SizedBox(
                   height: 30,
                 ),
