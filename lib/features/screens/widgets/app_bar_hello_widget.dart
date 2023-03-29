@@ -19,7 +19,7 @@ class AppBarHelloTextWidget extends StatelessWidget {
         children: [
           RichText(
               text: TextSpan(
-                  text: "Hello, ${user?.name}!",
+                  text: "Hello, ${user.name}!",
                   style: const TextStyle(
                       color: Colors.black,
                       fontSize: 22.0,

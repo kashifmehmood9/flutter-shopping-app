@@ -1,6 +1,5 @@
 import 'package:amazon_clone/features/providers/user_provider.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class AddressBox extends StatelessWidget {
@@ -31,7 +30,7 @@ class AddressBox extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.only(left: 5),
             child: Text(
-              "Delivery to ${user?.name} - ${user?.address}",
+              "Delivery to ${user.name} - ${user.address}",
               style: const TextStyle(fontWeight: FontWeight.w500),
               overflow: TextOverflow.ellipsis,
             ),

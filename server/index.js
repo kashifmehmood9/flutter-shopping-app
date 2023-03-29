@@ -1,12 +1,13 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const adminRoute = require("./routes/admin");
 
 const app = express();
 
 app.use(express.json());
 const authRouter = require("./routes/auth");
 app.use(authRouter);
-
+app.use(adminRoute);
 const PORT = 3000;
 const IP = "192.168.0.100";
 const DBURI =

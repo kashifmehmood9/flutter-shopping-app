@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:amazon_clone/Constants/utils.dart';
 import 'package:amazon_clone/common/custom_button.dart';
 import 'package:amazon_clone/common/custom_text_field.dart';
+import 'package:amazon_clone/features/services/admin_services.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +21,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
   final TextEditingController descController = TextEditingController();
   final TextEditingController priceController = TextEditingController();
   final TextEditingController quantityController = TextEditingController();
+  final adminServices = AdminServices();
 
   List<String> productCategories = [
     "Mobiles",
@@ -29,20 +31,34 @@ class _AddProductScreenState extends State<AddProductScreen> {
     "Fashion"
   ];
 
-  List<File> imagesList = [];
+  List<File> images = [];
+
+  final _addProductFormKey = GlobalKey<FormState>();
 
   void selectImages() async {
     var result = await pickImages();
     setState(() {
-      imagesList = result;
+      images = result;
     });
   }
 
   String category = "Mobiles";
 
+  void sellProduct() {
+    if (_addProductFormKey.currentState!.validate() && images.isNotEmpty) {
+      adminServices.sellProducts(
+          context: context,
+          name: productNameController.text,
+          description: descController.text,
+          price: double.parse(priceController.text),
+          quantity: double.parse(quantityController.text),
+          category: category,
+          images: images);
+    }
+  }
+
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     productNameController.dispose();
     descController.dispose();
@@ -71,6 +87,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
       ),
       body: SingleChildScrollView(
         child: Form(
+          key: _addProductFormKey,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Column(
@@ -78,11 +95,11 @@ class _AddProductScreenState extends State<AddProductScreen> {
                 const SizedBox(
                   height: 20,
                 ),
-                imagesList.isNotEmpty
+                images.isNotEmpty
                     ? GestureDetector(
                         onTap: selectImages,
                         child: CarouselSlider(
-                          items: imagesList.map((file) {
+                          items: images.map((file) {
                             return Builder(
                               builder: (context) => Image.file(
                                 file,
@@ -139,7 +156,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                 const SizedBox(height: 10),
                 CustomTextField(
                   hintText: "Product Description",
-                  controller: productNameController,
+                  controller: descController,
                   callback: (_) {},
                   maxLines: 7,
                 ),
@@ -179,7 +196,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                 const SizedBox(
                   height: 10,
                 ),
-                CustomButton(text: "Sell", onTap: () {}),
+                CustomButton(text: "Sell", onTap: sellProduct),
               ],
             ),
           ),
