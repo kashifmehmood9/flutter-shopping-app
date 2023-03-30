@@ -16,10 +16,10 @@ class SingleProduct extends StatelessWidget {
             color: Colors.white),
         child: Container(
           width: 180,
-          padding: const EdgeInsets.all(10),
+          padding: const EdgeInsets.all(8),
           child: Image.network(
             image,
-            fit: BoxFit.fitHeight,
+            fit: BoxFit.fitWidth,
             width: 180,
           ),
         ),

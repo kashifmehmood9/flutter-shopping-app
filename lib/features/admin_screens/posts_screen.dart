@@ -45,6 +45,7 @@ class _PostsScreen extends State<PostsScreen> {
         ? Loader()
         : Scaffold(
             body: GridView.builder(
+                padding: const EdgeInsets.symmetric(vertical: 8),
                 itemCount: listOfProducts!.length,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2),
@@ -53,17 +54,20 @@ class _PostsScreen extends State<PostsScreen> {
                   return Column(
                     children: [
                       SizedBox(
-                        height: 140,
+                        height: 139,
                         child: SingleProduct(image: product.images[0]),
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Expanded(
-                            child: Text(
-                              product.name,
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: 2,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                product.name,
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 2,
+                              ),
                             ),
                           ),
                           IconButton(
