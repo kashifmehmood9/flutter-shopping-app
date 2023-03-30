@@ -1,9 +1,11 @@
 import "dart:convert";
 
+import 'package:flutter/cupertino.dart';
+
 class Product {
   final String name;
   final String description;
-  final double quantity;
+  final int quantity;
   final List<String> images;
   final String category;
   final double price;
@@ -23,19 +25,20 @@ class Product {
       name: map["name"].toString(),
       description: map["description"].toString(),
       quantity: map["quantity"],
-      images: map["images"],
+      images: map["images"].cast<String>(),
       category: map["category"].toString(),
-      price: map["price"],
+      price: double.parse(map["price"].toString()),
       id: map["_id"].toString(),
     );
   }
 
-  String encode() {
-    return jsonEncode(toMap());
-  }
+  String toJson() => json.encode(toMap());
+
+  factory Product.fromJson(String source) =>
+      Product.fromMap(json.decode(source));
 
   Map<String, dynamic> toMap() {
-    var map = new Map<String, dynamic>();
+    var map = <String, dynamic>{};
     map["name"] = name;
     map["description"] = description;
     map["quantity"] = quantity;
@@ -44,7 +47,7 @@ class Product {
     map["price"] = price;
     map["_id"] = id;
 
-    print("Product Map after encoding: $map");
+    debugPrint("Product Map after encoding: $map");
     return map;
   }
 }
