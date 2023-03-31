@@ -28,7 +28,7 @@ class _PostsScreen extends State<PostsScreen> {
   }
 
   void navigateToAddProduct() {
-    Navigator.pushNamed(context, AddProductScreen.routeName)
+    Navigator.pushNamed(context, AddProductScreen.screenName)
         .then((_) => fetchAllProducts());
   }
 

@@ -6,8 +6,11 @@ const app = express();
 
 app.use(express.json());
 const authRouter = require("./routes/auth");
+const productRouter = require("./routes/product");
 app.use(authRouter);
 app.use(adminRoute);
+app.use(productRouter);
+
 const PORT = 3000;
 const IP = "192.168.0.100";
 const DBURI =

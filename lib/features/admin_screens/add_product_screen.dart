@@ -12,7 +12,7 @@ import '../../Constants/Constants.dart';
 
 class AddProductScreen extends StatefulWidget {
   const AddProductScreen({super.key});
-  static const String routeName = "/add_product";
+  static const String screenName = "/add_product";
   @override
   State<AddProductScreen> createState() => _AddProductScreenState();
 }

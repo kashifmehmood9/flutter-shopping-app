@@ -39,21 +39,24 @@ class _AdminScreenState extends State<AdminScreen> {
           decoration:
               const BoxDecoration(gradient: GlobalVariables.appBarGradient),
         ),
-        title:
-            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-          Container(
-            alignment: Alignment.topLeft,
-            child: Image.asset(
-              "assets/images/amazon_in.png",
-              width: 120,
-              height: 45,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Container(
+              alignment: Alignment.topLeft,
+              child: Image.asset(
+                "assets/images/amazon_in.png",
+                width: 120,
+                height: 45,
+              ),
             ),
-          ),
-          const Text(
-            "Admin",
-            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
-          )
-        ]),
+            const Text(
+              "Admin",
+              style:
+                  TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+            ),
+          ],
+        ),
       ),
       body: pages[_page],
       bottomNavigationBar: BottomNavigationBar(
