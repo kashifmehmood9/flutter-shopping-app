@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class GlobalVariables {
   static var headers = {"Content-Type": "application/json; charset=utf-8"};
-  static const localHostURI = 'http://192.168.0.100:3000';
+  static const localHostURI = 'http://localhost:3000';
   static const JWTtokenKey = "x-auth-token";
   // COLORS
   static const appBarGradient = LinearGradient(
