@@ -1,4 +1,5 @@
 import 'package:amazon_clone/common/custom_button.dart';
+import 'package:amazon_clone/features/services/product_details_services.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -17,6 +18,23 @@ class ProductDetailsScreen extends StatefulWidget {
 }
 
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
+  final service = ProductDetailsService();
+  double averageRating = 0;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    double totalRating = 0;
+
+    widget.product.rating
+        ?.forEach((e) => {totalRating += double.parse(e.rating)});
+
+    if (totalRating != 0) {
+      averageRating = totalRating / widget.product.rating!.length;
+    }
+  }
+
   void navigateToSeachScreen(String query) {
     // Navigator.pushNamed(context, SearchScreen.screenName, arguments: query);
   }
@@ -98,11 +116,11 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(widget.product.id!),
-                    Stars(rating: 4),
+                    Stars(rating: averageRating),
                   ],
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 ),
               ),
               Padding(
@@ -189,7 +207,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 ),
               ),
               RatingBar.builder(
-                  initialRating: 0,
+                  initialRating: averageRating,
                   minRating: 1,
                   direction: Axis.horizontal,
                   allowHalfRating: true,
@@ -201,7 +219,12 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       color: GlobalVariables.secondaryColor,
                     );
                   },
-                  onRatingUpdate: (rating) {})
+                  onRatingUpdate: (rating) {
+                    service.rateProduct(
+                        context: context,
+                        product: widget.product,
+                        rating: rating);
+                  })
             ],
           ),
         ),

@@ -1,5 +1,6 @@
 import "dart:convert";
 
+import 'package:amazon_clone/features/Models/rating.dart';
 import 'package:flutter/cupertino.dart';
 
 class Product {
@@ -10,6 +11,7 @@ class Product {
   final String category;
   final double price;
   final String? id;
+  final List<Rating>? rating;
 
   Product(
       {required this.name,
@@ -18,7 +20,8 @@ class Product {
       required this.images,
       required this.category,
       required this.price,
-      this.id});
+      this.id,
+      this.rating});
 
   factory Product.fromMap(Map<String, dynamic> map) {
     return Product(
@@ -29,6 +32,16 @@ class Product {
       category: map["category"].toString(),
       price: double.parse(map["price"].toString()),
       id: map["_id"].toString(),
+      rating: map["ratings"]
+          .map(
+            (x) {
+              print("+++++++++++++++++++++++++++ ${x.toString()}");
+
+              return Rating.fromMap(x);
+            },
+          )
+          .toList()
+          .cast<Rating>(),
     );
   }
 

@@ -26,4 +26,21 @@ productRouter.get("/api/products/search/:name", auth, async (req, res) => {
     }
 })
 
+productRouter.post('/api/rate-product', auth, async (req, res) => {
+    try {
+        console.log("Saving rating for "+req.body.id);
+
+            Product.findOneAndUpdate(
+                { userID: req.body.id },
+                { $set: { ratings: { userId: req.body.id, rating: req.body.rating } } },
+            )
+            .exec()
+            .then(function(product) {
+                res.send(product);
+            })
+    } catch (error) {
+        return res.status(500).json({ message: error.message })
+    }
+});
+
 module.exports = productRouter

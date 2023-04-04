@@ -39,7 +39,7 @@ class SearchServices {
           context: context);
     } catch (e) {
       showSnackBar(context, e.toString());
-      debugPrint("Got Error while getting products ${e.toString()}");
+      debugPrint("Got Error while searching products ${e.toString()}");
     }
     return productList;
   }
