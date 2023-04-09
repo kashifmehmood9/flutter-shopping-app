@@ -35,8 +35,6 @@ class Product {
       rating: map["ratings"]
           .map(
             (x) {
-              print("+++++++++++++++++++++++++++ ${x.toString()}");
-
               return Rating.fromMap(x);
             },
           )

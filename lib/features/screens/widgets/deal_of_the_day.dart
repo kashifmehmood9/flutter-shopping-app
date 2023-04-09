@@ -1,4 +1,9 @@
+import 'package:amazon_clone/features/screens/product_details/product_details.dart';
 import 'package:flutter/material.dart';
+
+import '../../Models/product.dart';
+import '../../services/home_services.dart';
+import '../../widgets/loader.dart';
 
 class DealOfTheDay extends StatefulWidget {
   const DealOfTheDay({super.key});
@@ -8,87 +13,97 @@ class DealOfTheDay extends StatefulWidget {
 }
 
 class _DealOfTheDayState extends State<DealOfTheDay> {
+  final service = HomeServices();
+  Product? product;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    fetchDealsOfTheDay();
+  }
+
+  void fetchDealsOfTheDay() async {
+    product = await service.fetchDealsOfTheDay(context);
+    setState(() {});
+  }
+
+  void navigateToDetailsScreen() {
+    Navigator.pushNamed(context, ProductDetailsScreen.screenName,
+        arguments: product);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          Container(
-            alignment: Alignment.topLeft,
-            padding: const EdgeInsets.only(
-              left: 10,
-              top: 10,
-            ),
-            child: const Text(
-              "Deal of the day",
-              style: TextStyle(fontSize: 20),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Image.network(
-              "https://images.unsplash.com/photo-1679231926885-0287bbe32008?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1391&q=80",
-            ),
-          ),
-          Container(
-            alignment: Alignment.topLeft,
-            padding: const EdgeInsets.only(left: 15),
-            child: const Text(
-              "\$99",
-              style: const TextStyle(fontSize: 18),
-            ),
-          ),
-          Container(
-            alignment: Alignment.topLeft,
-            padding: const EdgeInsets.only(left: 15, top: 5, right: 40),
-            child: const Text(
-              "Kashif",
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-            ),
-          ),
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Image.network(
-                  "https://images.unsplash.com/photo-1679231926885-0287bbe32008?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1391&q=80",
-                  fit: BoxFit.fitWidth,
-                  width: 100,
-                  height: 100,
+    return product == null
+        ? const Loader()
+        : product!.name.isEmpty
+            ? const SizedBox()
+            : SingleChildScrollView(
+                child: GestureDetector(
+                  onTap: navigateToDetailsScreen,
+                  child: Column(
+                    children: [
+                      Container(
+                        alignment: Alignment.topLeft,
+                        padding: const EdgeInsets.only(
+                          left: 10,
+                          top: 10,
+                        ),
+                        child: const Text(
+                          "Deal of the day",
+                          style: TextStyle(fontSize: 20),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Image.network(product!.images[0]),
+                      ),
+                      Container(
+                        alignment: Alignment.topLeft,
+                        padding: const EdgeInsets.only(left: 15),
+                        child: const Text(
+                          "\$99",
+                          style: const TextStyle(fontSize: 18),
+                        ),
+                      ),
+                      Container(
+                        alignment: Alignment.topLeft,
+                        padding:
+                            const EdgeInsets.only(left: 15, top: 5, right: 40),
+                        child: const Text(
+                          "Kashif",
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: product!.images
+                              .map(
+                                (e) => Image.network(
+                                  e,
+                                  fit: BoxFit.fitWidth,
+                                  width: 100,
+                                  height: 100,
+                                ),
+                              )
+                              .toList(),
+                        ),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.only(
+                            left: 15, top: 15, bottom: 15),
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          "All Deals",
+                          style: TextStyle(color: Colors.cyan[800]),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-                Image.network(
-                  "https://images.unsplash.com/photo-1679231926885-0287bbe32008?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1391&q=80",
-                  fit: BoxFit.fitWidth,
-                  width: 100,
-                  height: 100,
-                ),
-                Image.network(
-                  "https://images.unsplash.com/photo-1679231926885-0287bbe32008?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1391&q=80",
-                  fit: BoxFit.fitWidth,
-                  width: 100,
-                  height: 100,
-                ),
-                Image.network(
-                  "https://images.unsplash.com/photo-1679231926885-0287bbe32008?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1391&q=80",
-                  fit: BoxFit.fitWidth,
-                  width: 100,
-                  height: 100,
-                ),
-              ],
-            ),
-          ),
-          Container(
-            padding: const EdgeInsets.only(left: 15, top: 15, bottom: 15),
-            alignment: Alignment.topLeft,
-            child: Text(
-              "All Deals",
-              style: TextStyle(color: Colors.cyan[800]),
-            ),
-          ),
-        ],
-      ),
-    );
+              );
   }
 }

@@ -207,24 +207,26 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 ),
               ),
               RatingBar.builder(
-                  initialRating: averageRating,
-                  minRating: 1,
-                  direction: Axis.horizontal,
-                  allowHalfRating: true,
-                  itemCount: 5,
-                  itemPadding: const EdgeInsets.symmetric(horizontal: 4),
-                  itemBuilder: (context, _) {
-                    return const Icon(
-                      Icons.star,
-                      color: GlobalVariables.secondaryColor,
-                    );
-                  },
-                  onRatingUpdate: (rating) {
-                    service.rateProduct(
-                        context: context,
-                        product: widget.product,
-                        rating: rating);
-                  })
+                initialRating: averageRating,
+                minRating: 1,
+                direction: Axis.horizontal,
+                allowHalfRating: true,
+                itemCount: 5,
+                itemPadding: const EdgeInsets.symmetric(horizontal: 4),
+                itemBuilder: (context, _) {
+                  return const Icon(
+                    Icons.star,
+                    color: GlobalVariables.secondaryColor,
+                  );
+                },
+                onRatingUpdate: (rating) {
+                  debugPrint("Product updated is ${widget.product.name}");
+                  service.rateProduct(
+                      context: context,
+                      product: widget.product,
+                      rating: rating);
+                },
+              )
             ],
           ),
         ),

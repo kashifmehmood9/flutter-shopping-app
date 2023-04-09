@@ -9,8 +9,7 @@ void httpErrorHandler({
   required VoidCallback callback,
   required BuildContext context,
 }) {
-  print("Response status code : ${response.statusCode}");
-  print(response.body);
+  debugPrint(response.body);
   switch (response.statusCode) {
     case 200:
       return callback();

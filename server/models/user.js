@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-
+const {productSchema}  = require("../models/product");
 let validateEmail = function (email) {
   let re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
   return re.test(email);
@@ -47,6 +47,15 @@ const userSchema = mongoose.Schema({
     required: false,
     default: "user",
   },
+  cart: [
+  {
+    product: productSchema,
+    quantity: {
+        type: Number,
+        required: true,
+    }
+  }
+  ]
 });
 
 const User = mongoose.model("User", userSchema);

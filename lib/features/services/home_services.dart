@@ -44,4 +44,42 @@ class HomeServices {
     }
     return productList;
   }
+
+  Future<Product> fetchDealsOfTheDay(BuildContext context) async {
+    final provider = Provider.of<UserProvider>(context, listen: false);
+
+    String token = provider.get().token;
+
+    Map<String, String> headers = GlobalVariables.headers;
+    headers.addAll({GlobalVariables.JWTtokenKey: token});
+    Product product = Product(
+        name: "",
+        description: "",
+        quantity: 1,
+        images: [],
+        category: "",
+        price: 0.0);
+    try {
+      http.Response response = await http.get(
+          Uri.parse(
+            "${GlobalVariables.localHostURI}/api/deal-of-day",
+          ),
+          headers: headers);
+
+      debugPrint("Get deals of the day ${response.body}");
+
+      httpErrorHandler(
+          response: response,
+          callback: () {
+            product = Product.fromMap(jsonDecode(response.body)["product"]);
+            debugPrint(
+                "Decoding Product ${jsonDecode(response.body)["product"]} ");
+          },
+          context: context);
+    } catch (e) {
+      showSnackBar(context, e.toString());
+      debugPrint("Got Error while getting deals of the day ${e.toString()}");
+    }
+    return product;
+  }
 }
