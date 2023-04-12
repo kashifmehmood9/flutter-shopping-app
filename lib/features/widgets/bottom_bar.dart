@@ -1,8 +1,11 @@
 import 'package:amazon_clone/Constants/Constants.dart';
+import 'package:amazon_clone/features/Models/User.dart';
 import 'package:amazon_clone/features/account/account_screen.dart';
+import 'package:amazon_clone/features/providers/user_provider.dart';
 import 'package:amazon_clone/features/screens/home_screen/home_screen.dart';
 import "package:flutter/material.dart";
 import "package:badges/badges.dart";
+import "package:provider/provider.dart";
 
 class BottomBar extends StatefulWidget {
   const BottomBar({Key? key}) : super(key: key);
@@ -33,6 +36,8 @@ class _BottomBarState extends State<BottomBar> {
 
   @override
   Widget build(BuildContext context) {
+    final count = context.watch<UserProvider>().get().cart.length;
+
     return Scaffold(
       body: pages[_page],
       bottomNavigationBar: BottomNavigationBar(
@@ -70,25 +75,26 @@ class _BottomBarState extends State<BottomBar> {
                   ),
                   child: Icon(Icons.person_outline_outlined))),
           BottomNavigationBarItem(
-              label: "Cart",
-              icon: Container(
-                  width: bottomBarWidth,
-                  decoration: BoxDecoration(
-                    border: Border(
-                        top: BorderSide(
-                            color: _page == 2
-                                ? GlobalVariables.selectedNavBarColor
-                                : GlobalVariables.backgroundColor,
-                            width: bottomBarBorderWidth)),
-                  ),
-                  child: const Badge(
-                    badgeStyle: BadgeStyle(
-                        elevation: 0,
-                        badgeColor: GlobalVariables.backgroundColor),
-                    badgeContent: Text("2"),
-                    showBadge: true,
-                    child: Icon(Icons.shopping_cart_outlined),
-                  )))
+            label: "Cart",
+            icon: Container(
+              width: bottomBarWidth,
+              decoration: BoxDecoration(
+                border: Border(
+                    top: BorderSide(
+                        color: _page == 2
+                            ? GlobalVariables.selectedNavBarColor
+                            : GlobalVariables.backgroundColor,
+                        width: bottomBarBorderWidth)),
+              ),
+              child: Badge(
+                badgeStyle: const BadgeStyle(
+                    elevation: 0, badgeColor: GlobalVariables.backgroundColor),
+                badgeContent: Text("$count"),
+                showBadge: true,
+                child: const Icon(Icons.shopping_cart_outlined),
+              ),
+            ),
+          )
         ],
       ),
     );

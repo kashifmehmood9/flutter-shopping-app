@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const adminRoute = require("./routes/admin");
 const authRouter = require("./routes/auth");
 const productRouter = require("./routes/product");
+const userRouter = require("./routes/user");
 
 const app = express();
 app.use(express.json());
@@ -10,6 +11,7 @@ app.use(express.json());
 app.use(authRouter);
 app.use(adminRoute);
 app.use(productRouter);
+app.use(userRouter);
 
 const PORT = 3000;
 const IP = "localhost";

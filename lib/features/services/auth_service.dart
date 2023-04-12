@@ -30,7 +30,8 @@ class AuthService {
           email: email,
           address: "",
           token: "",
-          type: "");
+          type: "",
+          cart: []);
       http.Response response = await http.post(
         Uri.parse('${GlobalVariables.localHostURI}/api/signup'),
         body: user.encode(),
@@ -63,7 +64,8 @@ class AuthService {
           email: email,
           address: "",
           token: "",
-          type: "");
+          type: "",
+          cart: []);
 
       http.Response response = await http.post(
         Uri.parse('${GlobalVariables.localHostURI}/api/signin'),
