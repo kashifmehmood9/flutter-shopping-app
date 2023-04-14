@@ -25,60 +25,64 @@ class _CartProductState extends State<CartProduct> {
       children: [
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 10),
-          child: Row(
-            children: [
-              Image.network(
-                product.images[0],
-                fit: BoxFit.fitWidth,
-                height: 135,
-                width: 135,
-              ),
-              Column(
-                children: [
-                  Container(
-                    width: 235,
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: Text(
-                      product.name,
-                      style: const TextStyle(fontSize: 16),
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(color: Colors.black12)),
+            child: Row(
+              children: [
+                Padding(padding: EdgeInsets.only(left: 8)),
+                Image.network(
+                  product.images[0],
+                  fit: BoxFit.fitWidth,
+                  height: 135,
+                  width: 135,
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: Text(
+                        product.name,
+                        style: const TextStyle(fontSize: 16),
+                      ),
                     ),
-                  ),
-                  Container(
-                    width: 235,
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: Text(
-                      "${product.price}",
-                      style: const TextStyle(
-                          fontSize: 20, fontWeight: FontWeight.bold),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: Text(
+                        "${product.price}",
+                        style: const TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
                     ),
-                  ),
-                  Container(
-                    width: 235,
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: const Text(
-                      "Eligible for FREE shipping",
-                      style: TextStyle(fontSize: 16),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: const Text(
+                        "Eligible for FREE shipping",
+                        style: TextStyle(fontSize: 16),
+                      ),
                     ),
-                  ),
-                  Container(
-                    width: 235,
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: const Text(
-                      "In Stock",
-                      style: TextStyle(fontSize: 16, color: Colors.teal),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: const Text(
+                        "In Stock",
+                        style: TextStyle(fontSize: 16, color: Colors.teal),
+                      ),
                     ),
-                  ),
-                ],
-              )
-            ],
+                  ],
+                )
+              ],
+            ),
           ),
         ),
         Container(
           margin: const EdgeInsets.all(8),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Container(
+                margin: EdgeInsets.only(left: 4),
                 decoration: BoxDecoration(
                     border: Border.all(color: Colors.black12, width: 1.5),
                     borderRadius: BorderRadius.circular(12),
