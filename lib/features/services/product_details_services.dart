@@ -39,6 +39,34 @@ class ProductDetailsService {
     }
   }
 
+  void removeFromCart(
+      {required BuildContext context, required Product product}) async {
+    final provider = Provider.of<UserProvider>(context, listen: false);
+    try {
+      String token = provider.get().token;
+      Map<String, String> headers = GlobalVariables.headers;
+      headers.addAll({GlobalVariables.JWTtokenKey: token});
+
+      http.Response response = await http.delete(
+          Uri.parse(
+              "${GlobalVariables.localHostURI}/api/remove-from-cart/${product.id}"),
+          headers: GlobalVariables.headers);
+
+      httpErrorHandler(
+          response: response,
+          callback: () {
+            User user = provider
+                .get()
+                .copyWith(cart: jsonDecode(response.body)['cart']);
+
+            provider.set(user);
+          },
+          context: context);
+    } catch (e) {
+      showSnackBar(context, e.toString());
+    }
+  }
+
   void rateProduct(
       {required BuildContext context,
       required Product product,

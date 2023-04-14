@@ -35,7 +35,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     }
   }
 
-  void navigateToSeachScreen(String query) {
+  void navigateToSearchScreen(String query) {
     // Navigator.pushNamed(context, SearchScreen.screenName, arguments: query);
   }
 
@@ -60,7 +60,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     borderRadius: BorderRadius.circular(7),
                     elevation: 1,
                     child: TextFormField(
-                      onFieldSubmitted: navigateToSeachScreen,
+                      onFieldSubmitted: navigateToSearchScreen,
                       decoration: InputDecoration(
                         prefixIcon: InkWell(
                           onTap: () {},

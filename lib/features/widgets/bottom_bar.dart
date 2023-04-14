@@ -7,6 +7,8 @@ import "package:flutter/material.dart";
 import "package:badges/badges.dart";
 import "package:provider/provider.dart";
 
+import '../cart/screens/cart_screen.dart';
+
 class BottomBar extends StatefulWidget {
   const BottomBar({Key? key}) : super(key: key);
   static const screenName = "/bottom_bar";
@@ -19,12 +21,10 @@ class _BottomBarState extends State<BottomBar> {
   double bottomBarWidth = 42;
   double bottomBarBorderWidth = 5;
 
-  List pages = [
+  List pages = const [
     HomeScreen(),
     AccountScreen(),
-    Center(
-      child: Text("Shopping cart page"),
-    )
+    CartScreen(),
   ];
 
   void updatePage(int page) {
