@@ -8,6 +8,7 @@ import 'package:amazon_clone/features/widgets/bottom_bar.dart';
 import 'package:flutter/material.dart';
 
 import 'features/Models/product.dart';
+import 'features/address/screens/address_screen.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   print("++ Generate route called");
@@ -51,6 +52,13 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(
         settings: settings,
         builder: (_) => ProductDetailsScreen(product: product),
+      );
+
+    case AddressScreen.screenName:
+      var totalAmount = settings.arguments as String;
+      return MaterialPageRoute(
+        settings: settings,
+        builder: (_) => AddressScreen(amount: totalAmount),
       );
     default:
       return MaterialPageRoute(
