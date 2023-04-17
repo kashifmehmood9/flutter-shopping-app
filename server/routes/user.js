@@ -52,4 +52,14 @@ userRouter.delete("/api/remove-from-cart/:id", auth, async (req, res) => {
     }
 });
 
+userRouter.post("/api/order", auth, async (req, res) => {
+    try {
+        const { cart,totalPrice, address } = req.body;
+
+        return res.json(user);
+    } catch (error) {
+        return res.status(500).json({ message: error.message });
+    }
+});
+
 module.exports = userRouter;
