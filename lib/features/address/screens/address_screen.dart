@@ -84,14 +84,16 @@ class _AddressScreenState extends State<AddressScreen> {
   void payPressed(String addressFromProvider) {
     addressToBeUsed = "";
 
-    if (_addressFormKey.currentState!.validate()) {
-      addressToBeUsed =
-          '${flatBuildingController.text}, ${areaController.text}, ${cityController.text} - ${pincodeController.text}';
-    } else if (addressFromProvider.isNotEmpty) {
+    if (addressFromProvider.isNotEmpty) {
       addressToBeUsed = addressFromProvider;
     } else {
-      showSnackBar(context, 'Looks like address is not valid');
-      throw Exception('Please enter all the values!');
+      if (_addressFormKey.currentState!.validate()) {
+        addressToBeUsed =
+            '${flatBuildingController.text}, ${areaController.text}, ${cityController.text} - ${pincodeController.text}';
+      } else {
+        showSnackBar(context, 'Looks like address is not valid');
+        throw Exception('Please enter all the values!');
+      }
     }
   }
 
