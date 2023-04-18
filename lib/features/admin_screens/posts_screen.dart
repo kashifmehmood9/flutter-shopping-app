@@ -23,7 +23,7 @@ class _PostsScreen extends State<PostsScreen> {
   }
 
   void fetchAllProducts() async {
-    listOfProducts = await adminServices.getAllProducts(context);
+    listOfProducts = await adminServices.fetchAllProducts(context);
     setState(() {});
   }
 

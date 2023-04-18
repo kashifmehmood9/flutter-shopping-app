@@ -1,153 +1,207 @@
-import 'package:amazon_clone/features/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:pay/pay.dart';
 import 'package:provider/provider.dart';
 import '../../../Constants/Constants.dart';
+import '../../../Constants/utils.dart';
 import '../../../common/custom_text_field.dart';
+import '../../providers/user_provider.dart';
+import '../../services/address_services.dart';
 
 class AddressScreen extends StatefulWidget {
-  const AddressScreen({Key? key, required this.amount}) : super(key: key);
-  static const String screenName = "/address-screen";
-  final String amount;
+  static const String screenName = '/address-screen';
+  final String totalAmount;
+  const AddressScreen({
+    Key? key,
+    required this.totalAmount,
+  }) : super(key: key);
+
   @override
   State<AddressScreen> createState() => _AddressScreenState();
 }
 
 class _AddressScreenState extends State<AddressScreen> {
-  final flatBuildingController = TextEditingController();
-  final areaController = TextEditingController();
-  final pinCodeController = TextEditingController();
-  final cityController = TextEditingController();
-  final _formKey = GlobalKey<FormState>();
+  final TextEditingController flatBuildingController = TextEditingController();
+  final TextEditingController areaController = TextEditingController();
+  final TextEditingController pincodeController = TextEditingController();
+  final TextEditingController cityController = TextEditingController();
+  final _addressFormKey = GlobalKey<FormState>();
 
-  final List<PaymentItem> _paymentItems = [];
+  String addressToBeUsed = "";
+  List<PaymentItem> paymentItems = [];
+  final AddressService addressServices = AddressService();
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    _paymentItems.add(PaymentItem(
-      label: 'Total',
-      amount: widget.amount,
-      status: PaymentItemStatus.final_price,
-    ));
+    paymentItems.add(
+      PaymentItem(
+        amount: widget.totalAmount,
+        label: 'Total Amount',
+        status: PaymentItemStatus.final_price,
+      ),
+    );
   }
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
-    cityController.dispose();
-    areaController.dispose();
     flatBuildingController.dispose();
-    pinCodeController.dispose();
+    areaController.dispose();
+    pincodeController.dispose();
+    cityController.dispose();
   }
 
-  void onApplePayResult(result) {}
+  void onApplePayResult(res) {
+    if (Provider.of<UserProvider>(context, listen: false)
+        .get()
+        .address
+        .isEmpty) {
+      addressServices.saveUserAddress(
+          context: context, address: addressToBeUsed);
+    }
+    addressServices.placeOrder(
+      context: context,
+      address: addressToBeUsed,
+      totalSum: double.parse(widget.totalAmount),
+    );
+  }
 
-  void onGooglePayResult(result) {}
+  void onGooglePayResult(res) {
+    if (Provider.of<UserProvider>(context, listen: false)
+        .get()
+        .address
+        .isEmpty) {
+      addressServices.saveUserAddress(
+          context: context, address: addressToBeUsed);
+    }
+    addressServices.placeOrder(
+      context: context,
+      address: addressToBeUsed,
+      totalSum: double.parse(widget.totalAmount),
+    );
+  }
+
+  void payPressed(String addressFromProvider) {
+    addressToBeUsed = "";
+
+    if (_addressFormKey.currentState!.validate()) {
+      addressToBeUsed =
+          '${flatBuildingController.text}, ${areaController.text}, ${cityController.text} - ${pincodeController.text}';
+    } else if (addressFromProvider.isNotEmpty) {
+      addressToBeUsed = addressFromProvider;
+    } else {
+      showSnackBar(context, 'Looks like address is not valid');
+      throw Exception('Please enter all the values!');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     var address = context.watch<UserProvider>().get().address;
 
     return Scaffold(
-      appBar: AppBar(
-        flexibleSpace: Container(
-          decoration:
-              const BoxDecoration(gradient: GlobalVariables.appBarGradient),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(60),
+        child: AppBar(
+          flexibleSpace: Container(
+            decoration: const BoxDecoration(
+              gradient: GlobalVariables.appBarGradient,
+            ),
+          ),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            if (address.isNotEmpty)
-              Column(
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.black12),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              if (address.isNotEmpty)
+                Column(
+                  children: [
+                    Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Colors.black12,
+                        ),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          address,
+                          style: const TextStyle(
+                            fontSize: 18,
+                          ),
+                        ),
+                      ),
                     ),
-                    child: Text(
-                      maxLines: 1,
-                      address,
-                      style: const TextStyle(fontSize: 18),
+                    const SizedBox(height: 20),
+                    const Text(
+                      'OR',
+                      style: TextStyle(
+                        fontSize: 18,
+                      ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  const Text(
-                    maxLines: 1,
-                    "OR",
-                    style: TextStyle(fontSize: 18),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                ],
-              ),
-            Form(
-              key: _formKey,
-              child: Column(
-                children: [
-                  CustomTextField(
-                      hintText: "Flat",
+                    const SizedBox(height: 20),
+                  ],
+                ),
+              Form(
+                key: _addressFormKey,
+                child: Column(
+                  children: [
+                    CustomTextField(
                       controller: flatBuildingController,
-                      callback: (value) {
-                        _formKey.currentState!.validate();
-                      }),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  CustomTextField(
-                      hintText: "Area, street",
+                      hintText: 'Flat, House no, Building',
+                      callback: (String value) {},
+                    ),
+                    const SizedBox(height: 10),
+                    CustomTextField(
                       controller: areaController,
-                      callback: (value) {
-                        _formKey.currentState!.validate();
-                      }),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  CustomTextField(
-                      hintText: "Pin code",
-                      controller: pinCodeController,
-                      callback: (value) {
-                        _formKey.currentState!.validate();
-                      }),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  CustomTextField(
-                      hintText: "Town, City",
+                      hintText: 'Area, Street',
+                      callback: (String value) {},
+                    ),
+                    const SizedBox(height: 10),
+                    CustomTextField(
+                      controller: pincodeController,
+                      hintText: 'Pincode',
+                      callback: (String value) {},
+                    ),
+                    const SizedBox(height: 10),
+                    CustomTextField(
                       controller: cityController,
-                      callback: (value) {
-                        _formKey.currentState!.validate();
-                      }),
-                  const SizedBox(
-                    height: 25,
-                  ),
-                  ApplePayButton(
-                    style: ApplePayButtonStyle.whiteOutline,
-                    type: ApplePayButtonType.buy,
-                    height: 50,
-                    width: double.maxFinite,
-                    paymentConfigurationAsset: "applepay.json",
-                    onPaymentResult: onApplePayResult,
-                    paymentItems: _paymentItems,
-                  ),
-                  GooglePayButton(
-                    onPaymentResult: onGooglePayResult,
-                    paymentItems: _paymentItems,
-                    paymentConfigurationAsset: "gpay.json",
-                    height: 50,
-                    width: double.maxFinite,
-                  )
-                ],
+                      hintText: 'Town/City',
+                      callback: (String value) {},
+                    ),
+                    const SizedBox(height: 10),
+                  ],
+                ),
               ),
-            ),
-          ],
+              ApplePayButton(
+                width: double.infinity,
+                style: ApplePayButtonStyle.whiteOutline,
+                type: ApplePayButtonType.buy,
+                paymentConfigurationAsset: 'applepay.json',
+                onPaymentResult: onApplePayResult,
+                paymentItems: paymentItems,
+                margin: const EdgeInsets.only(top: 15),
+                height: 50,
+                onPressed: () => payPressed(address),
+              ),
+              const SizedBox(height: 10),
+              GooglePayButton(
+                onPressed: () => payPressed(address),
+                paymentConfigurationAsset: 'gpay.json',
+                onPaymentResult: onGooglePayResult,
+                paymentItems: paymentItems,
+                height: 50,
+                type: GooglePayButtonType.buy,
+                margin: const EdgeInsets.only(top: 15),
+                loadingIndicator: const Center(
+                  child: CircularProgressIndicator(),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

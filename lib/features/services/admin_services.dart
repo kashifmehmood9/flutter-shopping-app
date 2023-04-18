@@ -61,7 +61,7 @@ class AdminServices {
     }
   }
 
-  Future<List<Product>> getAllProducts(BuildContext context) async {
+  Future<List<Product>> fetchAllProducts(BuildContext context) async {
     final provider = Provider.of<UserProvider>(context, listen: false);
 
     String token = provider.get().token;
@@ -107,11 +107,11 @@ class AdminServices {
           Uri.parse("${GlobalVariables.localHostURI}/admin/delete-product"),
           headers: headers,
           body: jsonEncode({"id": product.id}));
-      debugPrint("response received: " + response.body);
+      debugPrint("response received: ${response.body}");
       httpErrorHandler(
           response: response,
           callback: () {
-            debugPrint("response received: " + response.body);
+            debugPrint("response received: ${response.body}");
             onSuccess();
           },
           context: context);

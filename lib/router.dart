@@ -58,7 +58,9 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       var totalAmount = settings.arguments as String;
       return MaterialPageRoute(
         settings: settings,
-        builder: (_) => AddressScreen(amount: totalAmount),
+        builder: (_) => AddressScreen(
+          totalAmount: totalAmount,
+        ),
       );
     default:
       return MaterialPageRoute(
