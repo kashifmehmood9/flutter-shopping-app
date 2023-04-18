@@ -21,7 +21,7 @@ class _CartScreenState extends State<CartScreen> {
     Navigator.pushNamed(context, SearchScreen.screenName, arguments: query);
   }
 
-  void navigateToAddressScreen(int sum) {
+  void navigateToAddressScreen(double sum) {
     Navigator.pushNamed(context, AddressScreen.screenName,
         arguments: sum.toString());
   }
@@ -29,10 +29,8 @@ class _CartScreenState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) {
     final user = context.watch<UserProvider>().get();
-    int sum = 0;
-    user.cart
-        .map((e) => sum += e['quantity'] * e['product']['price'] as int)
-        .toList();
+    double sum = 0;
+    user.cart.map((e) => sum += e.quantity * e.price).toList();
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60),
@@ -98,33 +96,35 @@ class _CartScreenState extends State<CartScreen> {
           ),
         ),
       ),
-      body: Column(
-        children: [
-          AddressBox(),
-          CartSubtotal(),
-          CustomButton(
-            text: "Proceed to Buy ${user.cart.length} Item(s)",
-            onTap: () => navigateToAddressScreen(sum),
-            color: Colors.yellow,
-          ),
-          const SizedBox(
-            height: 15,
-          ),
-          Container(
-            color: Colors.black12.withOpacity(0.08),
-            height: 1,
-          ),
-          Expanded(
-            child: ListView.builder(
-              shrinkWrap: true,
-              itemCount: user.cart.length,
-              itemBuilder: (context, index) {
-                return CartProduct(index: index);
-              },
+      body: user.cart.isEmpty
+          ? Center(child: Text("Cart is empty"))
+          : Column(
+              children: [
+                AddressBox(),
+                CartSubtotal(),
+                CustomButton(
+                  text: "Proceed to Buy ${user.cart.length} Item(s)",
+                  onTap: () => navigateToAddressScreen(sum),
+                  color: Colors.yellow,
+                ),
+                const SizedBox(
+                  height: 15,
+                ),
+                Container(
+                  color: Colors.black12.withOpacity(0.08),
+                  height: 1,
+                ),
+                Expanded(
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: user.cart.length,
+                    itemBuilder: (context, index) {
+                      return CartProduct(index: index);
+                    },
+                  ),
+                )
+              ],
             ),
-          )
-        ],
-      ),
     );
   }
 }

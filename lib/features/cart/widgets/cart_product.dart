@@ -18,9 +18,7 @@ class _CartProductState extends State<CartProduct> {
 
   @override
   Widget build(BuildContext context) {
-    final productCart = context.watch<UserProvider>().get().cart[widget.index];
-    final product = Product.fromMap(productCart["product"]);
-    final quantity = productCart["quantity"];
+    final product = context.watch<UserProvider>().get().cart[widget.index];
     return Column(
       children: [
         Container(
@@ -110,7 +108,7 @@ class _CartProductState extends State<CartProduct> {
                         height: 32,
                         width: 35,
                         alignment: Alignment.center,
-                        child: Text("$quantity"),
+                        child: Text("${product.quantity}"),
                       ),
                     ),
                     Container(

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:amazon_clone/features/Models/product.dart';
 import 'package:flutter/cupertino.dart';
 
 class User implements Copyable {
@@ -10,7 +11,7 @@ class User implements Copyable {
   String address;
   String token;
   String type;
-  final List<dynamic> cart;
+  final List<Product> cart;
 
   User(
       {required this.id,
@@ -31,9 +32,9 @@ class User implements Copyable {
       address: map["address"].toString(),
       token: map["token"].toString(),
       type: map["type"].toString(),
-      cart: List<Map<String, dynamic>>.from(
+      cart: List<Product>.from(
         map["cart"].map(
-          (e) => Map<String, dynamic>.from(e),
+          (e) => Product.fromMap(e["product"]),
         ),
       ),
     );
@@ -66,7 +67,7 @@ class User implements Copyable {
       String? address,
       String? token,
       String? type,
-      List<dynamic>? cart}) {
+      List<Product>? cart}) {
     // TODO: implement copyWith
     return User(
         id: id ?? this.id,

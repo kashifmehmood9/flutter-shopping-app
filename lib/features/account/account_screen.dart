@@ -17,17 +17,18 @@ class AccountScreen extends StatelessWidget {
             decoration:
                 const BoxDecoration(gradient: GlobalVariables.appBarGradient),
           ),
-          title:
-              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-            Container(
-              alignment: Alignment.topLeft,
-              child: Image.asset(
-                "assets/images/amazon_in.png",
-                width: 120,
-                height: 45,
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                alignment: Alignment.topLeft,
+                child: Image.asset(
+                  "assets/images/amazon_in.png",
+                  width: 120,
+                  height: 45,
+                ),
               ),
-            ),
-            Container(
+              Container(
                 padding: const EdgeInsets.only(left: 15, right: 15),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -38,8 +39,10 @@ class AccountScreen extends StatelessWidget {
                     ),
                     Icon(Icons.search),
                   ],
-                ))
-          ]),
+                ),
+              )
+            ],
+          ),
         ),
       ),
       body: Column(

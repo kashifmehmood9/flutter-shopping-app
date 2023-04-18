@@ -29,7 +29,7 @@ class ProductDetailsService {
           callback: () {
             User user = provider
                 .get()
-                .copyWith(cart: jsonDecode(response.body)['cart']);
+                .copyWith(cart: User.fromMap(jsonDecode(response.body)).cart);
 
             provider.set(user);
           },

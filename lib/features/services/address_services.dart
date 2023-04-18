@@ -62,8 +62,11 @@ class AddressService {
       http.Response response = await http.post(
           Uri.parse("${GlobalVariables.localHostURI}/api/order"),
           headers: headers,
-          body: jsonEncode(
-              {'cart': provider.get().cart, 'totalPrice': totalSum}));
+          body: jsonEncode({
+            'cart': provider.get().cart,
+            'totalPrice': totalSum,
+            'address': address
+          }));
       debugPrint("Got Product response $response");
       httpErrorHandler(
           response: response,
