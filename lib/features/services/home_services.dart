@@ -66,14 +66,10 @@ class HomeServices {
           ),
           headers: headers);
 
-      debugPrint("Get deals of the day ${response.body}");
-
       httpErrorHandler(
           response: response,
           callback: () {
             product = Product.fromMap(jsonDecode(response.body)["product"]);
-            debugPrint(
-                "Decoding Product ${jsonDecode(response.body)["product"]} ");
           },
           context: context);
     } catch (e) {

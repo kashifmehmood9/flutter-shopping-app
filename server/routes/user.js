@@ -20,7 +20,7 @@ userRouter.post("/api/add-to-cart", auth, async (req, res) => {
           user.cart.push({ product, quantity: 1 });
         } else {
             console.log("Product found in array")
-            user.cart[i].quantity += 1
+            user.cart[i].product.quantity += 1
         }
         user = await user.save();
         return res.json(user);
@@ -39,7 +39,7 @@ userRouter.delete("/api/remove-from-cart/:id", auth, async (req, res) => {
         let quantity = product.quantity;
 
         const i = user.cart.findIndex(e => e.product._id.equals(product._id));
-        if (user.cart[i].quantity == 1) {
+        if (user.cart[i].quantity <= 1) {
           console.log("removing from cart ")
           user.cart.splice(i, 1);
         } else {

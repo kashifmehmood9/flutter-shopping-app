@@ -11,8 +11,7 @@ import '../../Constants/error_handling.dart';
 import '../../Constants/utils.dart';
 
 class ProductDetailsService {
-  void addToCart(
-      {required BuildContext context, required Product product}) async {
+  addToCart({required BuildContext context, required Product product}) async {
     final provider = Provider.of<UserProvider>(context, listen: false);
     try {
       String token = provider.get().token;
@@ -57,7 +56,7 @@ class ProductDetailsService {
           callback: () {
             User user = provider
                 .get()
-                .copyWith(cart: jsonDecode(response.body)['cart']);
+                .copyWith(cart: User.fromMap(jsonDecode(response.body)).cart);
 
             provider.set(user);
           },

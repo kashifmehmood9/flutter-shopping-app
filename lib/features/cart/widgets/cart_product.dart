@@ -7,7 +7,7 @@ import '../../services/product_details_services.dart';
 
 class CartProduct extends StatefulWidget {
   final int index;
-  const CartProduct({Key? key, required this.index}) : super(key: key);
+  CartProduct({Key? key, required this.index}) : super(key: key);
 
   @override
   State<CartProduct> createState() => _CartProductState();
@@ -18,7 +18,10 @@ class _CartProductState extends State<CartProduct> {
 
   @override
   Widget build(BuildContext context) {
-    final product = context.watch<UserProvider>().get().cart[widget.index];
+    final user = context.watch<UserProvider>().get();
+    final cartProduct = user.cart[widget.index];
+    print(cartProduct.quantity);
+    print(user.cart[widget.index].quantity);
     return Column(
       children: [
         Container(
@@ -31,7 +34,7 @@ class _CartProductState extends State<CartProduct> {
               children: [
                 Padding(padding: EdgeInsets.only(left: 8)),
                 Image.network(
-                  product.images[0],
+                  cartProduct.product.images.first,
                   fit: BoxFit.fitWidth,
                   height: 135,
                   width: 135,
@@ -42,14 +45,14 @@ class _CartProductState extends State<CartProduct> {
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 10),
                       child: Text(
-                        product.name,
+                        cartProduct.product.name,
                         style: const TextStyle(fontSize: 16),
                       ),
                     ),
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 10),
                       child: Text(
-                        "${product.price}",
+                        "${cartProduct.product.price}",
                         style: const TextStyle(
                             fontSize: 20, fontWeight: FontWeight.bold),
                       ),
@@ -90,7 +93,7 @@ class _CartProductState extends State<CartProduct> {
                     InkWell(
                       onTap: () {
                         productDetailsService.removeFromCart(
-                            context: context, product: product);
+                            context: context, product: cartProduct.product);
                       },
                       child: Container(
                         height: 32,
@@ -108,7 +111,7 @@ class _CartProductState extends State<CartProduct> {
                         height: 32,
                         width: 35,
                         alignment: Alignment.center,
-                        child: Text("${product.quantity}"),
+                        child: Text("${cartProduct.quantity}"),
                       ),
                     ),
                     Container(
@@ -117,9 +120,9 @@ class _CartProductState extends State<CartProduct> {
                       alignment: Alignment.center,
                       child: InkWell(
                         child: Icon(Icons.add),
-                        onTap: () {
-                          productDetailsService.addToCart(
-                              context: context, product: product);
+                        onTap: () async {
+                          await productDetailsService.addToCart(
+                              context: context, product: cartProduct.product);
                         },
                       ),
                     )

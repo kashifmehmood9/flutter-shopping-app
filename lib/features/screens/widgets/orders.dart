@@ -4,8 +4,7 @@ import 'package:amazon_clone/features/screens/widgets/single_product.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
-
-import '../../Models/product.dart';
+import 'package:amazon_clone/features/Models/cart.dart';
 
 class Orders extends StatefulWidget {
   const Orders({super.key});
@@ -17,7 +16,7 @@ class Orders extends StatefulWidget {
 class _OrdersState extends State<Orders> {
   @override
   Widget build(BuildContext context) {
-    List<Product> list = context.watch<UserProvider>().get().cart;
+    List<CartProductModel> list = context.watch<UserProvider>().get().cart;
 
     return Column(
       children: [
@@ -54,7 +53,7 @@ class _OrdersState extends State<Orders> {
             itemCount: list.length,
             itemBuilder: ((context, index) {
               print(list[index]);
-              return SingleProduct(image: list[index].images.first);
+              return SingleProduct(image: list[index].product.images.first);
             }),
           ),
         ),
