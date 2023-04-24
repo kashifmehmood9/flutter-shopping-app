@@ -101,12 +101,13 @@ class AuthService {
     }
 
     Map<String, String> headers = GlobalVariables.headers;
-    headers.addAll({GlobalVariables.JWTtokenKey: token!});
+    headers.addAll({GlobalVariables.JWTtokenKey: token ?? ""});
     var tokenResponse = await http.post(
       Uri.parse("${GlobalVariables.localHostURI}/api/tokenIsValid"),
       headers: headers,
     );
 
+    print(tokenResponse.body);
     if (jsonDecode(tokenResponse.body)) {
       http.Response userResponse = await http.get(
           Uri.parse("${GlobalVariables.localHostURI}/api/users"),

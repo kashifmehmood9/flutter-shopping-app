@@ -61,7 +61,7 @@ authRouter.post("/api/tokenIsValid", async (req, res) => {
     const token = req.header("x-auth-token");
 
     if (!token) {
-      return res.json({ message: "No token provided." });
+      return res.json(false);
     }
 
     const verified = jwt.verify(token, "passwordKey");

@@ -6,6 +6,8 @@ import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
 import 'package:amazon_clone/features/Models/cart.dart';
 
+import '../../services/account_services.dart';
+
 class Orders extends StatefulWidget {
   const Orders({super.key});
 
@@ -14,10 +16,28 @@ class Orders extends StatefulWidget {
 }
 
 class _OrdersState extends State<Orders> {
+  AccountServices accountServices = AccountServices();
+  List<CartProductModel> list = [];
+
+  @override
+  void initState() {
+    super.initState();
+    // fetchAllOrders();
+    // WidgetsBinding.instance.addPostFrameCallback((_) async {
+    fetchAllOrders();
+    // });
+    print("Initialized 1");
+  }
+
+  void fetchAllOrders() async {
+    list = await accountServices.fetchAllOrders(context);
+    print("Initialized 2");
+    setState(() {});
+    print("Initialized 3");
+  }
+
   @override
   Widget build(BuildContext context) {
-    List<CartProductModel> list = context.watch<UserProvider>().get().cart;
-
     return Column(
       children: [
         Row(
