@@ -66,29 +66,32 @@ userRouter.post("/api/save-user-address", auth, async (req, res) => {
   }
 });
 
-
 // order product
 
 userRouter.post("/api/order", auth, async (req, res) => {
     try {
-        const { cart,totalPrice,address } = req.body;
-        let products = [];
+            const { cart, totalPrice, address } = req.body;
 
-        for(let i = 0; i < cart.length; i++) {
-            let product = await Product.findById(cart[i].product._id)
-            console.log("1. Ordering "+product)
-            if(product.quantity >= cart[i].quantity) {
-                console.log("2. Ordering "+product)
-                product.quantity -= cart[i].quantity
-                products.push({product, quantity: cart[i].quantity})
+            let products = [];
+
+            for (let i = 0; i < cart.length; i++) {
+                console.log("Cart product "+cart[i])
+                let object = JSON.parse(cart[i])
+                console.log("Object quantity "+ object["quantity"])
+
+               let product = await Product.findOne({ where: { cart } });
+              console.log("Ordered product "+product.quantity)
+              if (product.quantity >= object["quantity"]) {
+
+                product.quantity -= object["quantity"];
+                products.push({ product, quantity: object["quantity"] });
                 await product.save();
-            } else {
-                console.log("Out of stock product "+product.quantity)
-                console.log("Out of stock cart "+cart[i].quantity)
-                return res.status(400).json({message: `${product.name} is out of stock`});
+              } else {
+                return res
+                  .status(400)
+                  .json({ msg: `${product.name} is out of stock!` });
+              }
             }
-        }
-
         let user = await User.findById(req.user)
         user.carts = []
         user = await user.save()

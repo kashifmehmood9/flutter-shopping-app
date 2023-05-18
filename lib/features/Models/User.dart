@@ -13,7 +13,7 @@ class User implements Copyable {
   String address;
   String token;
   String type;
-  List<CartProductModel> cart;
+  List<dynamic> cart;
 
   User(
       {required this.id,
@@ -34,7 +34,7 @@ class User implements Copyable {
       address: map["address"].toString(),
       token: map["token"].toString(),
       type: map["type"].toString(),
-      cart: List<CartProductModel>.from(
+      cart: List<dynamic>.from(
         map["cart"].map((e) {
           return CartProductModel(
               product: Product.fromMap(e["product"]), quantity: e["quantity"]);
@@ -44,12 +44,13 @@ class User implements Copyable {
   }
 
   String encode() {
+    debugPrint("Encoding user : ${jsonEncode(toMap())}");
     return jsonEncode(toMap());
   }
 
   Map<String, dynamic> toMap() {
     var map = <String, dynamic>{};
-    map["_id"] = id;
+    map["id"] = id;
     map["password"] = password;
     map["name"] = name;
     map["email"] = email;
@@ -70,7 +71,7 @@ class User implements Copyable {
       String? address,
       String? token,
       String? type,
-      List<CartProductModel>? cart}) {
+      List<dynamic>? cart}) {
     return User(
         id: id ?? this.id,
         password: password ?? this.password,

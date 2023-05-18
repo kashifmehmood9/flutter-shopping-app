@@ -59,15 +59,12 @@ class AddressService {
     headers.addAll({GlobalVariables.JWTtokenKey: token});
 
     try {
+      debugPrint("provider.get().cart ${provider.get().cart.length}");
       http.Response response = await http.post(
           Uri.parse("${GlobalVariables.localHostURI}/api/order"),
           headers: headers,
-          body: jsonEncode({
-            'cart': provider.get().cart,
-            'totalPrice': totalSum,
-            'address': address
-          }));
-      debugPrint("Got Product response $response");
+          body: localJSONEncode(provider, totalSum, address));
+      // debugPrint("Got Product response $response");
       httpErrorHandler(
           response: response,
           callback: () {
@@ -81,5 +78,15 @@ class AddressService {
       showSnackBar(context, e.toString());
       debugPrint("Got Error while getting products ${e.toString()}");
     }
+  }
+
+  String localJSONEncode(
+      UserProvider provider, double totalSum, String address) {
+    debugPrint("Encoding cart ${jsonEncode(provider.get().cart)}");
+    return jsonEncode({
+      'cart': provider.get().cart,
+      'totalPrice': totalSum,
+      'address': address
+    });
   }
 }

@@ -57,8 +57,6 @@ class Product {
     map["category"] = category;
     map["price"] = price;
     map["_id"] = id;
-
-    debugPrint("Product Map after encoding: $map");
     return map;
   }
 }
