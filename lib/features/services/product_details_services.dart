@@ -31,6 +31,7 @@ class ProductDetailsService {
                 .copyWith(cart: User.fromMap(jsonDecode(response.body)).cart);
 
             provider.set(user);
+            debugPrint("Add to cart ${user.cart.first.quantity}");
           },
           context: context);
     } catch (e) {

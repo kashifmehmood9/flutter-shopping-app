@@ -20,8 +20,7 @@ class _CartProductState extends State<CartProduct> {
   Widget build(BuildContext context) {
     final user = context.watch<UserProvider>().get();
     final cartProduct = user.cart[widget.index];
-    print(cartProduct.quantity);
-    print(user.cart[widget.index].quantity);
+    debugPrint("Quantity ${cartProduct.quantity}");
     return Column(
       children: [
         Container(
