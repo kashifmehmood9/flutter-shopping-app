@@ -1,4 +1,4 @@
-# amazon_clone
+# Flutter Shopping app
 
 A new Flutter project.
 
