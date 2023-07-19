@@ -1,11 +1,11 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:amazon_clone/Constants/Constants.dart';
-import 'package:amazon_clone/Constants/error_handling.dart';
-import 'package:amazon_clone/Constants/utils.dart';
-import 'package:amazon_clone/features/Models/product.dart';
-import 'package:amazon_clone/features/providers/user_provider.dart';
+import 'package:flutter_shopping_app/Constants/Constants.dart';
+import 'package:flutter_shopping_app/Constants/error_handling.dart';
+import 'package:flutter_shopping_app/Constants/utils.dart';
+import 'package:flutter_shopping_app/features/Models/product.dart';
+import 'package:flutter_shopping_app/features/providers/user_provider.dart';
 import 'package:cloudinary_public/cloudinary_public.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;

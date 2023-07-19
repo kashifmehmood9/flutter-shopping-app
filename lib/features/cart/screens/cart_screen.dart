@@ -1,8 +1,8 @@
-import 'package:amazon_clone/common/custom_button.dart';
-import 'package:amazon_clone/features/address/screens/address_screen.dart';
-import 'package:amazon_clone/features/cart/widgets/cart_product.dart';
-import 'package:amazon_clone/features/cart/widgets/cart_subtotal.dart';
-import 'package:amazon_clone/features/providers/user_provider.dart';
+import 'package:flutter_shopping_app/common/custom_button.dart';
+import 'package:flutter_shopping_app/features/address/screens/address_screen.dart';
+import 'package:flutter_shopping_app/features/cart/widgets/cart_product.dart';
+import 'package:flutter_shopping_app/features/cart/widgets/cart_subtotal.dart';
+import 'package:flutter_shopping_app/features/providers/user_provider.dart';
 import "package:flutter/material.dart";
 import "package:provider/provider.dart";
 import '../../../Constants/Constants.dart';

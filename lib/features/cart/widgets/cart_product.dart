@@ -1,4 +1,5 @@
-import 'package:amazon_clone/features/providers/user_provider.dart';
+import 'package:flutter_shopping_app/features/Models/cart.dart';
+import 'package:flutter_shopping_app/features/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -19,7 +20,7 @@ class _CartProductState extends State<CartProduct> {
   @override
   Widget build(BuildContext context) {
     final user = context.watch<UserProvider>().get();
-    final cartProduct = user.cart[widget.index];
+    final cartProduct = user.cart[widget.index] as CartProductModel;
     debugPrint("Quantity ${cartProduct.quantity}");
     return Column(
       children: [

@@ -1,4 +1,4 @@
-import 'package:amazon_clone/Constants/Constants.dart';
+import 'package:flutter_shopping_app/Constants/Constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 

@@ -1,5 +1,5 @@
-import 'package:amazon_clone/features/Models/product.dart';
-import 'package:amazon_clone/features/cart/widgets/cart_product.dart';
+import 'package:flutter_shopping_app/features/Models/product.dart';
+import 'package:flutter_shopping_app/features/cart/widgets/cart_product.dart';
 
 class Order {
   String id;

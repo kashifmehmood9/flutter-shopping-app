@@ -1,6 +1,6 @@
-import 'package:amazon_clone/Constants/Constants.dart';
-import 'package:amazon_clone/features/Models/category_images.dart';
-import 'package:amazon_clone/features/screens/home_screen/categroy_deals_screen.dart';
+import 'package:flutter_shopping_app/Constants/Constants.dart';
+import 'package:flutter_shopping_app/features/Models/category_images.dart';
+import 'package:flutter_shopping_app/features/screens/home_screen/categroy_deals_screen.dart';
 import "package:flutter/material.dart";
 
 class TopCategories extends StatelessWidget {

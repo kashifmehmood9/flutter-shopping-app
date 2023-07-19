@@ -1,9 +1,9 @@
 import 'dart:convert';
 
-import 'package:amazon_clone/features/Models/User.dart';
-import 'package:amazon_clone/features/providers/user_provider.dart';
-import 'package:amazon_clone/features/widgets/bottom_bar.dart';
-import 'package:amazon_clone/router.dart';
+import 'package:flutter_shopping_app/features/Models/User.dart';
+import 'package:flutter_shopping_app/features/providers/user_provider.dart';
+import 'package:flutter_shopping_app/features/widgets/bottom_bar.dart';
+import 'package:flutter_shopping_app/router.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import "package:provider/provider.dart";

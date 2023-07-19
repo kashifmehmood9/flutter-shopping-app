@@ -1,9 +1,9 @@
-import 'package:amazon_clone/features/screens/widgets/address_box.dart';
-import 'package:amazon_clone/features/screens/widgets/carousel_image.dart';
-import 'package:amazon_clone/features/screens/widgets/deal_of_the_day.dart';
-import 'package:amazon_clone/features/screens/widgets/top_categories.dart';
+import 'package:flutter_shopping_app/features/screens/widgets/address_box.dart';
+import 'package:flutter_shopping_app/features/screens/widgets/carousel_image.dart';
+import 'package:flutter_shopping_app/features/screens/widgets/deal_of_the_day.dart';
+import 'package:flutter_shopping_app/features/screens/widgets/top_categories.dart';
 import "package:flutter/material.dart";
-import 'package:amazon_clone/features/search/search_screen.dart';
+import 'package:flutter_shopping_app/features/search/search_screen.dart';
 import '../../../Constants/Constants.dart';
 import '../../services/search_services.dart';
 

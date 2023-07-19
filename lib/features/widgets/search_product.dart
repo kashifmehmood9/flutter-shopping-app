@@ -1,4 +1,4 @@
-import 'package:amazon_clone/features/widgets/stars.dart';
+import 'package:flutter_shopping_app/features/widgets/stars.dart';
 import 'package:flutter/material.dart';
 
 import '../Models/product.dart';

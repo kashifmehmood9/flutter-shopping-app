@@ -4,7 +4,7 @@ A Flutter Shopping app project.
 All API's are written in node.js and Mobile app written in flutter.
 Containerized API application can be found on docker hub also
 
-https://hub.docker.com/repository/docker/kashifmehmood/amazon_clone/general
+https://hub.docker.com/repository/docker/kashifmehmood/flutter_shopping_app/general
 
 ## Getting Started
 

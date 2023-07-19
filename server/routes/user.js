@@ -46,13 +46,19 @@ userRouter.post("/api/add-to-cart", auth, async (req, res) => {
     var user = await User.findById(req.user);
     let quantity = product.quantity;
 
+
     const i = user.cart.findIndex((e) => e.product._id.equals(product._id));
+    console.log("1. adding to cart product " + user.cart[i].quantity);
+    console.log("2. adding to cart product " + user.cart[i].product.quantity);
     if (i == -1) {
       console.log("Pushing");
       user.cart.push({ product, quantity: 1 });
+    } else if (user.cart[i].quantity >= user.cart[i].product.quantity) {
+        console.log("More items not available");
+        return res.status(400).json({ message: "No more items of this type in stock." });
     } else {
       console.log("Product found in array");
-      user.cart[i].product.quantity += 1;
+      user.cart[i].quantity += 1;
       console.log("QUANTITY added to cart product " + user.cart[i].quantity);
     }
     user = await user.save();
@@ -72,6 +78,7 @@ userRouter.delete("/api/remove-from-cart/:id", auth, async (req, res) => {
     let quantity = product.quantity;
 
     const i = user.cart.findIndex((e) => e.product._id.equals(product._id));
+
     if (user.cart[i].quantity <= 1) {
       console.log("removing from cart ");
       user.cart.splice(i, 1);

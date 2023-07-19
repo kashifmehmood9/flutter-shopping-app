@@ -1,4 +1,4 @@
-import 'package:amazon_clone/features/screens/product_details/product_details.dart';
+import 'package:flutter_shopping_app/features/screens/product_details/product_details.dart';
 import 'package:flutter/material.dart';
 
 import '../../Models/product.dart';

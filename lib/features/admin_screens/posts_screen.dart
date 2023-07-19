@@ -1,6 +1,6 @@
-import 'package:amazon_clone/features/admin_screens/add_product_screen.dart';
-import 'package:amazon_clone/features/screens/widgets/single_product.dart';
-import 'package:amazon_clone/features/widgets/loader.dart';
+import 'package:flutter_shopping_app/features/admin_screens/add_product_screen.dart';
+import 'package:flutter_shopping_app/features/screens/widgets/single_product.dart';
+import 'package:flutter_shopping_app/features/widgets/loader.dart';
 import 'package:flutter/material.dart';
 
 import '../Models/product.dart';

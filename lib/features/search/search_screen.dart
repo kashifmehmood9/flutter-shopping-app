@@ -1,7 +1,7 @@
-import 'package:amazon_clone/features/screens/widgets/address_box.dart';
-import 'package:amazon_clone/features/services/search_services.dart';
-import 'package:amazon_clone/features/widgets/loader.dart';
-import 'package:amazon_clone/features/widgets/search_product.dart';
+import 'package:flutter_shopping_app/features/screens/widgets/address_box.dart';
+import 'package:flutter_shopping_app/features/services/search_services.dart';
+import 'package:flutter_shopping_app/features/widgets/loader.dart';
+import 'package:flutter_shopping_app/features/widgets/search_product.dart';
 import 'package:flutter/material.dart';
 
 import '../../Constants/Constants.dart';

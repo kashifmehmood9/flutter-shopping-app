@@ -1,10 +1,10 @@
-import 'package:amazon_clone/features/admin_screens/add_product_screen.dart';
-import 'package:amazon_clone/features/admin_screens/admin_screen.dart';
-import 'package:amazon_clone/features/screens/auth_screen.dart';
-import 'package:amazon_clone/features/screens/home_screen/categroy_deals_screen.dart';
-import 'package:amazon_clone/features/screens/product_details/product_details.dart';
-import 'package:amazon_clone/features/search/search_screen.dart';
-import 'package:amazon_clone/features/widgets/bottom_bar.dart';
+import 'package:flutter_shopping_app/features/admin_screens/add_product_screen.dart';
+import 'package:flutter_shopping_app/features/admin_screens/admin_screen.dart';
+import 'package:flutter_shopping_app/features/screens/auth_screen.dart';
+import 'package:flutter_shopping_app/features/screens/home_screen/categroy_deals_screen.dart';
+import 'package:flutter_shopping_app/features/screens/product_details/product_details.dart';
+import 'package:flutter_shopping_app/features/search/search_screen.dart';
+import 'package:flutter_shopping_app/features/widgets/bottom_bar.dart';
 import 'package:flutter/material.dart';
 
 import 'features/Models/product.dart';

@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.amazon_clone">
+    package="com.example.flutter_shopping_app">
    <application
-        android:label="amazon_clone"
+        android:label="flutter_shopping_app"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

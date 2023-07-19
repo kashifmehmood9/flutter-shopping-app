@@ -1,8 +1,8 @@
-import 'package:amazon_clone/Constants/Constants.dart';
-import 'package:amazon_clone/features/Models/User.dart';
-import 'package:amazon_clone/features/account/account_screen.dart';
-import 'package:amazon_clone/features/providers/user_provider.dart';
-import 'package:amazon_clone/features/screens/home_screen/home_screen.dart';
+import 'package:flutter_shopping_app/Constants/Constants.dart';
+import 'package:flutter_shopping_app/features/Models/User.dart';
+import 'package:flutter_shopping_app/features/account/account_screen.dart';
+import 'package:flutter_shopping_app/features/providers/user_provider.dart';
+import 'package:flutter_shopping_app/features/screens/home_screen/home_screen.dart';
 import "package:flutter/material.dart";
 import "package:badges/badges.dart";
 import "package:provider/provider.dart";

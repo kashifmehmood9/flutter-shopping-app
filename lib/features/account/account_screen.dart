@@ -1,7 +1,7 @@
-import 'package:amazon_clone/Constants/Constants.dart';
-import 'package:amazon_clone/features/screens/widgets/app_bar_hello_widget.dart';
-import 'package:amazon_clone/features/screens/widgets/orders.dart';
-import 'package:amazon_clone/features/screens/widgets/top_buttons.dart';
+import 'package:flutter_shopping_app/Constants/Constants.dart';
+import 'package:flutter_shopping_app/features/screens/widgets/app_bar_hello_widget.dart';
+import 'package:flutter_shopping_app/features/screens/widgets/orders.dart';
+import 'package:flutter_shopping_app/features/screens/widgets/top_buttons.dart';
 import "package:flutter/material.dart";
 
 class AccountScreen extends StatelessWidget {

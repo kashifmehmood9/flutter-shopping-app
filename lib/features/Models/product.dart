@@ -1,6 +1,6 @@
 import "dart:convert";
 
-import 'package:amazon_clone/features/Models/rating.dart';
+import 'package:flutter_shopping_app/features/Models/rating.dart';
 import 'package:flutter/cupertino.dart';
 
 class Product {

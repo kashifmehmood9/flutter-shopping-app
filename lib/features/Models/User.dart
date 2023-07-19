@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:amazon_clone/features/Models/product.dart';
+import 'package:flutter_shopping_app/features/Models/product.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'cart.dart';

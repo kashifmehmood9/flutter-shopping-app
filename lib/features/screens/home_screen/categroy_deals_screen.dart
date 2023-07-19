@@ -1,10 +1,10 @@
 import 'dart:core';
 import 'dart:core';
 
-import 'package:amazon_clone/features/Models/product.dart';
-import 'package:amazon_clone/features/screens/product_details/product_details.dart';
-import 'package:amazon_clone/features/services/home_services.dart';
-import 'package:amazon_clone/features/widgets/loader.dart';
+import 'package:flutter_shopping_app/features/Models/product.dart';
+import 'package:flutter_shopping_app/features/screens/product_details/product_details.dart';
+import 'package:flutter_shopping_app/features/services/home_services.dart';
+import 'package:flutter_shopping_app/features/widgets/loader.dart';
 import 'package:flutter/material.dart';
 
 import '../../../Constants/Constants.dart';

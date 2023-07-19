@@ -1,4 +1,4 @@
-import 'package:amazon_clone/features/admin_screens/posts_screen.dart';
+import 'package:flutter_shopping_app/features/admin_screens/posts_screen.dart';
 import 'package:flutter/material.dart';
 import '../../Constants/Constants.dart';
 

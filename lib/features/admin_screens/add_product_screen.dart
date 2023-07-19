@@ -1,10 +1,10 @@
 import 'dart:io';
 
-import 'package:amazon_clone/Constants/utils.dart';
-import 'package:amazon_clone/common/custom_button.dart';
-import 'package:amazon_clone/common/custom_text_field.dart';
-import 'package:amazon_clone/features/services/admin_services.dart';
-import 'package:amazon_clone/features/widgets/loader.dart';
+import 'package:flutter_shopping_app/Constants/utils.dart';
+import 'package:flutter_shopping_app/common/custom_button.dart';
+import 'package:flutter_shopping_app/common/custom_text_field.dart';
+import 'package:flutter_shopping_app/features/services/admin_services.dart';
+import 'package:flutter_shopping_app/features/widgets/loader.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';

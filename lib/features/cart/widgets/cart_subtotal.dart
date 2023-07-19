@@ -1,4 +1,4 @@
-import 'package:amazon_clone/features/providers/user_provider.dart';
+import 'package:flutter_shopping_app/features/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
