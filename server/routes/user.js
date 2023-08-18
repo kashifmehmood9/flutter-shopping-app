@@ -5,38 +5,6 @@ const User = require("../models/user");
 const { Product } = require("../models/product");
 const Order = require("../models/order");
 
-//userRouter.post("/api/add-to-cart", auth, async (req, res) => {
-//  try {
-//    const { id } = req.body;
-//    const product = await Product.findById(id);
-//    let user = await User.findById(req.user);
-//
-//    if (user.cart.length == 0) {
-//      user.cart.push({ product, quantity: 1 });
-//    } else {
-//      let isProductFound = false;
-//      for (let i = 0; i < user.cart.length; i++) {
-//        if (user.cart[i].product._id.equals(product._id)) {
-//          isProductFound = true;
-//        }
-//      }
-//
-//      if (isProductFound) {
-//        let producttt = user.cart.find((productt) =>
-//          productt.product._id.equals(product._id)
-//        );
-//        producttt.quantity += 1;
-//      } else {
-//        user.cart.push({ product, quantity: 1 });
-//      }
-//    }
-//    user = await user.save();
-//    res.json(user);
-//  } catch (e) {
-//    res.status(500).json({ error: e.message });
-//  }
-//});
-
 userRouter.post("/api/add-to-cart", auth, async (req, res) => {
   try {
     const { id } = req.body;
@@ -44,8 +12,6 @@ userRouter.post("/api/add-to-cart", auth, async (req, res) => {
     const product = await Product.findById(id);
 
     var user = await User.findById(req.user);
-    let quantity = product.quantity;
-
 
     const i = user.cart.findIndex((e) => e.product._id.equals(product._id));
     console.log("1. adding to cart product " + user.cart[i].quantity);
@@ -54,8 +20,10 @@ userRouter.post("/api/add-to-cart", auth, async (req, res) => {
       console.log("Pushing");
       user.cart.push({ product, quantity: 1 });
     } else if (user.cart[i].quantity >= user.cart[i].product.quantity) {
-        console.log("More items not available");
-        return res.status(400).json({ message: "No more items of this type in stock." });
+      console.log("More items not available");
+      return res
+        .status(400)
+        .json({ message: "No more items of this type in stock." });
     } else {
       console.log("Product found in array");
       user.cart[i].quantity += 1;
@@ -75,7 +43,6 @@ userRouter.delete("/api/remove-from-cart/:id", auth, async (req, res) => {
     const product = await Product.findById(id);
 
     let user = await User.findById(req.user);
-    let quantity = product.quantity;
 
     const i = user.cart.findIndex((e) => e.product._id.equals(product._id));
 
