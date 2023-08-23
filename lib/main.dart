@@ -37,26 +37,32 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Amazon Clone',
-      theme: ThemeData(
-        scaffoldBackgroundColor: GlobalVariables.backgroundColor,
-        colorScheme: const ColorScheme.light(
-          primary: GlobalVariables.secondaryColor,
-        ),
-        appBarTheme: const AppBarTheme(
-          elevation: 0,
-          iconTheme: IconThemeData(
-            color: Colors.black,
+        debugShowCheckedModeBanner: false,
+        title: 'Amazon Clone',
+        theme: ThemeData(
+          scaffoldBackgroundColor: GlobalVariables.backgroundColor,
+          colorScheme: const ColorScheme.light(
+            primary: GlobalVariables.secondaryColor,
+          ),
+          appBarTheme: const AppBarTheme(
+            elevation: 0,
+            iconTheme: IconThemeData(
+              color: Colors.black,
+            ),
           ),
         ),
-      ),
-      onGenerateRoute: (settings) => generateRoute(settings),
-      home: Provider.of<UserProvider>(context).get().token.isNotEmpty
-          ? Provider.of<UserProvider>(context).get().type == 'user'
-              ? const BottomBar()
-              : const AdminScreen()
-          : const AuthScreen(),
-    );
+        onGenerateRoute: (settings) => generateRoute(settings),
+        home: home());
+  }
+
+  Widget? home() {
+    User user = Provider.of<UserProvider>(context).get();
+    if (user.token.isNotEmpty && user.type == 'admin') {
+      return const AdminScreen();
+    } else if (user.token.isNotEmpty && user.type == 'user') {
+      return const BottomBar();
+    } else {
+      return AuthScreen();
+    }
   }
 }
