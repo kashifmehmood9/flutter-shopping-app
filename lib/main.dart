@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'Constants/Constants.dart';
+import 'features/Models/User.dart';
 import 'features/admin_screens/admin_screen.dart';
 import 'features/providers/user_provider.dart';
 import 'features/screens/auth_screen.dart';

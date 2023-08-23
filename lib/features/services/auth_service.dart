@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:flutter_shopping_app/features/Models/User.dart';
 import 'package:flutter_shopping_app/features/providers/user_provider.dart';
 import 'package:flutter_shopping_app/features/widgets/bottom_bar.dart';
-import 'package:flutter_shopping_app/router.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import "package:provider/provider.dart";
@@ -16,6 +15,11 @@ import '../../Constants/utils.dart';
 enum Auth { signin, signup }
 
 class AuthService {
+  Future<void> signOutUser() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('x-auth-token', "");
+  }
+
   void signupUser({
     required BuildContext context,
     required String username,
@@ -72,12 +76,12 @@ class AuthService {
         body: user.encode(),
         headers: GlobalVariables.headers,
       );
-      user = User.fromMap(jsonDecode(response.body));
 
       httpErrorHandler(
           response: response,
           callback: () async {
             showSnackBar(context, "User sign in successfully.");
+            user = User.fromMap(jsonDecode(response.body));
             SharedPreferences prefs = await SharedPreferences.getInstance();
             Provider.of<UserProvider>(context, listen: false).set(user);
             prefs.setString("x-auth-token", user.token);

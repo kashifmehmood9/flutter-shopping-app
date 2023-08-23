@@ -4,6 +4,7 @@ import 'package:flutter_shopping_app/features/providers/user_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../Models/cart.dart';
 
